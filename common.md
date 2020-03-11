@@ -1,3 +1,29 @@
+# git 添加子模块
+
+```
+git submodule add 仓库地址 路径
+```
+
+
+
+其中，仓库地址是指子模块仓库地址，路径指将子模块放置在当前工程下的路径。 
+注意：路径不能以 / 结尾（会造成修改不生效）、不能是现有工程已有的目录（不能順利 Clone）
+
+# git 子模块的使用
+
+```
+git submodule init
+git submodule update
+```
+
+或者
+
+```
+git submodule update --init --recursive
+```
+
+
+
 # git和TortoiseGit使用同一SSH密钥
 
  
