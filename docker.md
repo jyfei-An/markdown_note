@@ -1,3 +1,37 @@
+# DockerFile
+
+
+
+
+
+# 停止所有运行的容器
+
+```
+docker stop $(docker ps -aq)
+```
+
+
+
+# 删除所有的镜像
+
+```
+docker rmi $(docker images -aq)
+```
+
+
+
+
+
+# 批量删除运行的容器
+
+```
+docker rm $(docker ps -aq)
+```
+
+
+
+
+
 # 映射端口
 
 ```
