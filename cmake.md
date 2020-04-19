@@ -1,3 +1,10 @@
+# linux下安装打开cmkae界面
+
+1. sudo apt-get install cmake-qt-gui
+2. cmake-gui
+
+
+
 CMake example github:
 
 ```
@@ -8,10 +15,10 @@ https://github.com/ttroy50/cmake-examples.git
 
 | Variable                 | Info                                                         |
 | ------------------------ | ------------------------------------------------------------ |
-| CMAKE_SOURCE_DIR         | The root source directory                                    |
+| CMAKE_SOURCE_DIR         | The root source directory，一般为第一个cmakelist.txt所在目录 |
 | CMAKE_CURRENT_SOURCE_DIR | The current source directory if using sub-projects and directories. |
 | PROJECT_SOURCE_DIR       | The source directory of the current cmake project.           |
-| CMAKE_BINARY_DIR         | The root binary / build directory. This is the directory where you ran the cmake command. |
+| CMAKE_BINARY_DIR         | The root binary / build directory. This is the directory where you ran the cmake command. **一般为build输出目录** |
 | CMAKE_CURRENT_BINARY_DIR | The build directory you are currently in.                    |
 | PROJECT_BINARY_DIR       | The build directory for the current project.                 |
 
@@ -132,9 +139,36 @@ project (hello_cmake)
 add_executable(hello_cmake main.cpp)
 ```
 
+### insatll区分windows和linux
 
+```
+if(WIN32)
+  install(TARGETS ${NAME}
+    RUNTIME DESTINATION path)
+else()
+  install(TARGETS ${NAME}
+    LIBRARY DESTINATION path)
+endif()   
+```
 
+### 添加FPIC选项
 
+```
+https://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option
+```
+
+You can set the position independent code property on all targets:
+
+```
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+```
+
+or in a specific library:
+
+```
+add_library(lib1 SHARED lib1.cpp)
+set_property(TARGET lib1 PROPERTY POSITION_INDEPENDENT_CODE ON)
+```
 
 # CMake 命令行
 

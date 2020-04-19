@@ -1,9 +1,86 @@
+# linux常用命令
+
+## zip
+
+```
+zip -r foo.zip foo //压缩文件夹
+```
+
+
+
+# 切换安装gcc,g++版本
+
+```
+https://linuxize.com/post/how-to-install-gcc-compiler-on-ubuntu-18-04/
+```
+
+
+
+# 虚拟机共享文件夹的位置
+
+```
+/mnt/hgfs/
+```
+
+
+
+# 安装Qtcreator
+
+## Install Qt Creator
+
+```bash
+sudo apt install build-essential
+sudo apt install qtcreator
+```
+
+If you want Qt 5 to be the default Qt version to be used when using development binaries like qmake, install the following package:
+
+```bash
+sudo apt install qt5-default
+```
+
+##  Install documentation and examples
+
+If Qt Creator is installed thanks to the Ubuntu Sofware Center or thanks to the synaptic package manager, documentation for Qt Creator is not installed. Hitting the F1 key will show you the following message : **“No documentation available”**. This can easily be solved by installing the Qt documentation:
+
+```bash
+sudo apt install qt5-doc
+```
+
+And eventually:
+
+```bash
+sudo apt install qt5-doc-html qtbase5-doc-html
+```
+
+If examples are still missing:
+
+```bash
+sudo apt install qtbase5-examples
+```
+
+Restart Qt Creator to make the documentation available.
+
 # 设置软件更新源
 
 在terminal输入下面命令，弹出设置框，选择阿里云源
 
 ```
 software-properties-gtk
+```
+
+# 更新全部软件
+
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+# 卸载软件
+
+```
+//或者sudo apt-get purge <package-name>
+sudo apt-get remove <application_name>
 ```
 
 
