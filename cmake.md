@@ -24,7 +24,7 @@ https://github.com/ttroy50/cmake-examples.git
 
 # CMake 常用命令
 
-### Minimum CMake version
+## Minimum CMake version
 
 设置CMake最低版本要求
 
@@ -32,7 +32,7 @@ https://github.com/ttroy50/cmake-examples.git
 cmake_minimum_required(VERSION 3.12)
 ```
 
-### Projects
+## Projects
 
 设置项目名字
 
@@ -40,7 +40,7 @@ cmake_minimum_required(VERSION 3.12)
 project (hello_cmake)
 ```
 
-### Creating an Executable
+## Creating an Executable
 
 编译生成可执行文件，第一个参数是可执行文件的名称，第二个参数是编译的源文件
 
@@ -48,7 +48,7 @@ project (hello_cmake)
 add_executable(hello_cmake main.cpp)
 ```
 
-### Source Files Variable
+## Source Files Variable
 
 设置项目包含的源文件
 
@@ -68,7 +68,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 file(GLOB SOURCES "src/*.cpp")
 ```
 
-###  Including Directories
+##  Including Directories
 
 ```
 target_include_directories(target
@@ -77,7 +77,7 @@ target_include_directories(target
 )
 ```
 
-### Adding a Static Library
+## Adding a Static Library
 
 This will be used to create a static library with the name libhello_library.a with the sources in the add_library call.
 
@@ -87,7 +87,7 @@ add_library(hello_library STATIC
 )
 ```
 
-### Linking a Library
+## Linking a Library
 
 ```
 add_executable(hello_binary
@@ -100,7 +100,7 @@ target_link_libraries( hello_binary
 )
 ```
 
-### Adding a Shared Library
+## Adding a Shared Library
 
 ```
 add_library(hello_library SHARED
@@ -108,7 +108,7 @@ add_library(hello_library SHARED
 )
 ```
 
-### Linking a Shared Library
+## Linking a Shared Library
 
 ```
 //设置动态库的别名
@@ -124,7 +124,7 @@ target_link_libraries(hello_binary
 )
 ```
 
-### A Basic Cmakelist.txt
+## A Basic Cmakelist.txt
 
 ```
 # Set the minimum version of CMake that can be used
@@ -139,7 +139,7 @@ project (hello_cmake)
 add_executable(hello_cmake main.cpp)
 ```
 
-### insatll区分windows和linux
+## insatll区分windows和linux
 
 ```
 if(WIN32)
@@ -151,7 +151,7 @@ else()
 endif()   
 ```
 
-### 添加FPIC选项
+## 添加FPIC选项
 
 ```
 https://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option
@@ -169,6 +169,56 @@ or in a specific library:
 add_library(lib1 SHARED lib1.cpp)
 set_property(TARGET lib1 PROPERTY POSITION_INDEPENDENT_CODE ON)
 ```
+
+## ExternalProject_Add
+
+```
+include(ExternalProject)
+
+ExternalProject_Add(libmongoc
+        GIT_REPOSITORY  "git@git.cqhorizon.com:jiayunfei/mongodb-c-driver-1.14.0.git"
+        SOURCE_DIR      "${CMAKE_BINARY_DIR}/libmongoc"
+        BINARY_DIR      "${CMAKE_BINARY_DIR}/libmongoc-build"
+        INSTALL_DIR     "${CMAKE_BINARY_DIR}/libmongoc-install"
+        CMAKE_CACHE_ARGS
+            ${common_cmake_cache_args}
+            -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}/libmongoc-install
+            -DENABLE_TESTS:BOOL=OFF
+            -DENABLE_STATIC:BOOL=OFF
+            -DENABLE_EXAMPLES:BOOL=OFF
+            -DENABLE_EXTRA_ALIGNMENT:BOOL=OFF
+        #INSTALL_COMMAND ""
+    )
+    set(libmongoc-1.0_DIR "${CMAKE_BINARY_DIR}/libmongoc-install/lib/cmake/libmongoc-1.0/")
+    set(libbson-1.0_DIR "${CMAKE_BINARY_DIR}/libmongoc-install/lib/cmake/libbson-1.0/")
+    
+    ExternalProject_Add(libmongocxx
+    GIT_REPOSITORY  "git@git.cqhorizon.com:jiayunfei/mongo-cxx-driver-r3.4.0.git"
+    SOURCE_DIR      "${CMAKE_BINARY_DIR}/libmongocxx"
+    BINARY_DIR      "${CMAKE_BINARY_DIR}/libmongocxx-build"
+    INSTALL_DIR     "${CMAKE_BINARY_DIR}/libmongocxx-install"
+    CMAKE_CACHE_ARGS
+        ${common_cmake_cache_args}
+        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}/libmongocxx-install
+        -DBUILD_SHARED_LIBS:BOOL=ON
+        -DENABLE_TESTS:BOOL=OFF
+        -DENABLE_EXAMPLES:BOOL=OFF
+        -DBSONCXX_POLY_USE_BOOST:BOOL=ON
+        -DBSONCXX_POLY_USE_MNMLSTC:BOOL=OFF
+        -DBSONCXX_POLY_USE_STD:BOOL=OFF
+        -Dlibmongoc-1.0_DIR:PATH=${libmongoc-1.0_DIR}
+        -Dlibbson-1.0_DIR:PATH=${libbson-1.0_DIR}
+    DEPENDS
+        libmongoc
+)
+set(libmongocxx_DIR "${CMAKE_BINARY_DIR}/libmongocxx-install/lib/cmake/libmongocxx-3.3.1/")
+set(libbsoncxx_DIR "${CMAKE_BINARY_DIR}/libmongocxx-install//lib/cmake/libbsoncxx-3.3.1/")
+```
+
+
+
+
+
 
 # CMake 命令行
 
