@@ -1,9 +1,75 @@
+# linux 常用工具
+
+```
+https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
+```
+
+
+
+# 安装deb文件
+
+```
+ sudo  dpkg  -i  package.deb
+```
+
+
+
 # linux常用命令
 
-## zip
+## 复制文件
+
+```
+cp  源文件(source) 目标文件(destination)
+```
+
+## 文件移动
+
+```
+mv  source destination
+```
+
+## 文件删除
+
+```
+rm [fir] 文件或目录
+```
+
+
+
+## 压缩文件夹
 
 ```
 zip -r foo.zip foo //压缩文件夹
+```
+
+## 清空终端窗口信息
+
+```
+clear
+```
+
+## 查看目录内容
+
+```
+ls 目录路径
+如果省略目录路径就可以察看当前目录里的内容
+使用-a选项可以察看目录里的所有内容
+使用-l选项可以察看内容的详细信息
+可以把这两个选项合并成-al
+```
+
+## 创建文件夹
+
+
+
+## find查找
+
+https://vitux.com/how-to-find-files-on-the-ubuntu-command-line/
+
+```
+find /path/to/file/ -iname filename
+example：
+find / -iname test.txt //从根目录查找text.txt文件
 ```
 
 

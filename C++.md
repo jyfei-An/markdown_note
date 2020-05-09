@@ -1,3 +1,13 @@
+# 区分系统是windows还是ubuntu
+
+```
+#ifdef _WIN32
+#else
+#endif
+```
+
+
+
 #  判断文件夹是否存在并创建文件夹
 
 ```C++

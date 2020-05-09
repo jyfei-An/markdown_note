@@ -6,6 +6,15 @@
 sudo apt-get install git
 ```
 
+## 安装gui
+
+```
+sudo apt-get install git-gui
+git gui//打开gui界面
+```
+
+
+
 ## 配置邮箱和名字
 
 ```
