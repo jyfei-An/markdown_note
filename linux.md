@@ -4,7 +4,17 @@
 https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
 ```
 
+## fsearch搜索工具
 
+```
+https://www.addictivetips.com/ubuntu-linux-tips/fsearch-find-files-on-linux/
+```
+
+## gparted 磁盘管理工具
+
+```
+GParted
+```
 
 # 安装deb文件
 
@@ -12,43 +22,46 @@ https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
  sudo  dpkg  -i  package.deb
 ```
 
-
-
 # linux常用命令
 
-## 复制文件
+## 查看ubuntu系统版本
+
+```
+sudo lsb_release -a
+```
+
+## 复制文件cp
 
 ```
 cp  源文件(source) 目标文件(destination)
 ```
 
-## 文件移动
+## 文件移动mv
 
 ```
 mv  source destination
 ```
 
-## 文件删除
+## 文件删除rm
 
 ```
-rm [fir] 文件或目录
+rm  文件或目录
+rm命令加上-r选项就可以用来删除一个目录
 ```
 
-
-
-## 压缩文件夹
+## 压缩文件夹zip
 
 ```
 zip -r foo.zip foo //压缩文件夹
 ```
 
-## 清空终端窗口信息
+## 清空终端窗口信息clear
 
 ```
 clear
 ```
 
-## 查看目录内容
+## 查看目录内容ls
 
 ```
 ls 目录路径
@@ -58,7 +71,15 @@ ls 目录路径
 可以把这两个选项合并成-al
 ```
 
-## 创建文件夹
+## 创建文件夹mkdir
+
+```
+mkdir path
+mkdir命令可以用来创建目录
+要求目录本身还不存在但是父目录必须存在
+在命令中使用-p选项可以把路径中所有不存在
+    的目录都创建出来
+```
 
 
 
@@ -70,6 +91,29 @@ https://vitux.com/how-to-find-files-on-the-ubuntu-command-line/
 find /path/to/file/ -iname filename
 example：
 find / -iname test.txt //从根目录查找text.txt文件
+```
+
+## vi模式
+
+```
+正常模式下可以执行简单命令
+插入模式下可以修改文字内容
+命令模式下可以执行复杂命令
+
+每次启动vi以后一定处于正常模式下
+
+不同工作模式之间可以互相转换
+在正常模式下输入i可以进入插入模式
+在正常模式下输入:可以进入命令模式
+在任何时候输入esc可以进入正常模式
+
+可以采用如下命令启动vi
+vi 文件路径
+
+可以采用两种方法退出vi
+1.在命令模式下输入q!(丢失所有没保存的修改)
+2.在命令模式下输入wq或x(先保存所有修改然后
+		   再退出)
 ```
 
 
@@ -182,8 +226,6 @@ set number
 
 
 
-
-
 # 环境变量
 
 ## 设置临时环境变量
@@ -191,6 +233,9 @@ set number
 ```
 //export NAME=VALUE
 export JAVA_HOME=/opt/openjdk11
+
+//append PATH
+exprot PATH=$PATH:YourPath
 ```
 
 ## 取消环境变量设置
@@ -239,4 +284,3 @@ set
    
    
    
-   ## 

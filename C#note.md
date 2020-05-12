@@ -1,3 +1,25 @@
+# C#调用C++动态库
+
+If the C++ library function returns `char*`, C# code will treat it as `IntPtr` and `Marshal.PtrToStringAnsi()` will convert it into C# `string`.
+
+```
+IntPtr verText = f1();
+string s = Marshal.PtrToStringAnsi(verText);
+Console.WriteLine(s);
+```
+
+
+
+# 睡眠函数
+
+```
+using System.Threading;
+
+Thread.Sleep(500);//睡眠500毫秒，也就是0.5秒
+```
+
+
+
 # 继承/多态
 
 ```c#

@@ -1,3 +1,5 @@
+
+
 # linux下载安装git
 
 ## 安装
@@ -42,6 +44,12 @@ git checkout .
 ```
 
 
+
+# git 将本地修改添加到stash中
+
+```
+git add .
+```
 
 # git删除子模块
 

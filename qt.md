@@ -32,3 +32,12 @@ If examples are still missing:
 ```bash
 sudo apt install qtbase5-examples
 ```
+
+## install svg,charts
+
+```
+sudo apt install libqt5svg5-dev
+sudo apt-get install qttools5-dev
+sudo apt install libqt5charts5-dev
+```
+
