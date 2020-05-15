@@ -1,3 +1,15 @@
+# typeora侧边折叠显示
+
+```
+https://blog.csdn.net/tian_ci/article/details/85257667
+```
+
+# 录屏软件
+
+```
+Captura
+```
+
 # 打开画图
 
 ```
