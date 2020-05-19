@@ -4,6 +4,12 @@
 https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
 ```
 
+## 打开多个终端窗口
+
+```
+Ctrl+Shift+T
+```
+
 ## fsearch搜索工具
 
 ```
@@ -91,6 +97,12 @@ https://vitux.com/how-to-find-files-on-the-ubuntu-command-line/
 find /path/to/file/ -iname filename
 example：
 find / -iname test.txt //从根目录查找text.txt文件
+```
+
+## whereis  查找
+
+```
+whereis 命令/文件名
 ```
 
 ## vi模式

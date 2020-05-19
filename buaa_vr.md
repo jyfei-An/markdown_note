@@ -1,3 +1,15 @@
+# 3dmax
+
+![image-20200516141328572](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200516141328572.png)
+
+
+
+# 自然辩证法
+
+![image-20200516140615879](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200516140615879.png)
+
+
+
 # 虚拟现实程序设计
 
 各位同学，今天为虚拟现实程序设计课程第一节课，上课之前，有一些课堂要求，请每位同学都必须遵守：
