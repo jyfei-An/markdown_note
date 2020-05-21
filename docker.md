@@ -4,7 +4,7 @@
 
 
 
-# 停止所有运行的容器
+# 停止所有运行的容器（PowerShell）
 
 ```
 docker stop $(docker ps -aq)
@@ -22,7 +22,7 @@ docker rmi $(docker images -aq)
 
 
 
-# 批量删除运行的容器
+# 批量删除运行的容器(PowerShell)
 
 ```
 docker rm $(docker ps -aq)
