@@ -30,6 +30,12 @@ GParted
 
 # linux常用命令
 
+## 查看动态库依赖性
+
+```
+ldd 动态库名字
+```
+
 ## 查看ubuntu系统版本
 
 ```
@@ -212,6 +218,14 @@ sudo apt-get remove <application_name>
 ```
 sudo apt-get remove vim-common
 sudo apt-get install vim
+```
+
+
+
+# vi卡死解决办法
+
+```
+Ctrl+S在Linux里是锁定屏幕的快捷键，如果要解锁，按下Ctrl+Q就可以了。
 ```
 
 

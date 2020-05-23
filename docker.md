@@ -1,6 +1,18 @@
+# 实例
+
+## msbuild docker 离线安装
+
+```
+vs_BuildTools.exe --layout c:\BT2017offline --add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.WebBuildTools --add Microsoft.VisualStudio.Workload.NetCoreBuildTools  --includeRecommended --includeOptional --lang en-US
+```
+
+```
+https://stackoverflow.com/questions/46684230/visualstudio-build-tools-2017-offline-installer
+```
+
+
+
 # DockerFile
-
-
 
 
 
@@ -185,3 +197,14 @@ docker load < busybox.tar.gz
 docker load --input fedora.tar
 ```
 
+# 重命名镜像名字
+
+```
+ docker tag IMAGEID(镜像id) REPOSITORY:TAG（仓库：标签）
+```
+
+![image-20200523120550831](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200523120550831.png)
+
+# 重命名容器名字
+
+![image-20200523120649903](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200523120649903.png)

@@ -37,15 +37,29 @@ ssh-keygen -C 'youremail@163.com' -t rsa
 登录[github](https://link.jianshu.com?t=https%3A%2F%2Fgithub.com)，进入个人的Settings页面，点击`SSH and GPG keys`，再点击`New SSH key`进行配置。
  在刚刚保存的路径`~/.ssh/`下找到公钥文件，`.`开头的文件夹为隐藏文件夹，使用`Ctrl +h`组合键查看隐藏文件。打开`.ssh`下的`id_rsa.pub`文件，复制所有内容到github上。
 
-# git还原本地所有修改
+
+
+# Git命令
+
+## 创建+切换分支
+
+```
+git checkout -b [branch name]
+```
+
+## 切换分支
+
+```
+git checkout branch name
+```
+
+## git还原本地所有修改
 
 ```
 git checkout . 
 ```
 
-
-
-# git 将本地修改添加到stash中
+## git 将本地修改添加到stash中
 
 ```
 git add .
