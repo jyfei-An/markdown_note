@@ -11,6 +11,26 @@
 
 ![image-20200515221802526](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200515221802526.png)
 
+
+
+# QDir的使用
+
+## 1 判断文件夹是否存在
+
+```
+QString dir_str = "E:\CodeTest";
+
+// 检查目录是否存在，若不存在则新建
+QDir dir;
+if (!dir.exists(dir_str))
+{
+bool res = dir.mkpath(dir_str);
+qDebug() << "新建目录是否成功" << res;
+}
+```
+
+
+
 # QPushButton的使用
 
 ## 信号槽函数
@@ -18,6 +38,129 @@
 ```
  connect(ui.ok_btn_, &QPushButton::clicked, this, &CSAddSubModel::accept);
  connect(ui.cancel_btn_, &QPushButton::clicked, this, &QDialog::reject);
+```
+
+# QDialog的使用
+
+## 1 去掉问号按钮
+
+下面两种方法均可让对话框的问号按钮去掉，如果其中一种不生效，可更换另一种
+
+1 方法一
+
+```
+Qt::WindowFlags flags = Qt::Dialog;
+flags |= Qt::WindowCloseButtonHint;
+dlg->setWindowFlags(flags);
+```
+
+2 方法二
+
+```
+this->setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+```
+
+##  2 使最大化按钮失效
+
+```
+setWindowFlags(Qt::WindowCloseButtonHint|Qt::WindowMinimizeButtonHint);
+```
+
+##  3 初始界面最大化
+
+```
+setWindowState(Qt::WindowMaximized);
+```
+
+
+
+# QTableWidget的使用
+
+## 1 设置某列不可编辑
+
+```
+QTableWidgetItem *item = new QTableWidgetItem("test");
+item->setFlags(item->flags() & (~Qt::ItemIsEditable));
+```
+
+## 2 设置表格禁止编辑
+
+```
+ui.tablewidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+```
+
+## 3 设置单击选择某一行
+
+不是选择某一项
+
+```
+//设置单击选择一行
+ui.tablewidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+//设置只能选择一行，不能多行选中
+ui.tablewidget->setSelectionMode(QAbstractItemView::SingleSelection);
+```
+
+##  4 设置表格列宽
+
+设置表格最后一列自适应拉伸
+
+```
+ui.tablewidget->setColumnWidth(0, 220);
+ui.tablewidget->setColumnWidth(1, 65);
+ui.tablewidget->horizontalHeader()->setStretchLastSection(true);
+```
+
+##  5 表格插入数据
+
+```
+int row_count = ui.tablewidget->rowCount();
+ui.tablewidget->insertRow(row_count);
+QTableWidgetItem *item_time = new QTableWidgetItem(current_date);
+QTableWidgetItem *item_level = new QTableWidgetItem(QString::fromStdString(level));
+QTableWidgetItem *item_data = new QTableWidgetItem(QString::fromStdString(data));
+ui.tablewidget->setItem(row_count, 0, item_time);
+ui.tablewidget->setItem(row_count, 1, item_level);
+ui.tablewidget->setItem(row_count, 2, item_data);
+```
+
+##  6 删除表格的所有行
+
+```
+ui.table_widget_->clearContents();
+for (int i = ui.log_widget_->rowCount(); i > 0; i--)
+{
+    ui.log_widget_->removeRow(0);
+}
+```
+
+## 7 设置表格自适应拉伸（均分表格）
+
+表格可以随着窗口的变大而变大
+
+```
+ ui.tableWidget->horizontalHeader()->setSectionResizeMode(
+    QHeaderView::Stretch);
+ ui.tableWidget->verticalHeader()->setSectionResizeMode(
+    QHeaderView::Stretch);
+```
+
+## 8 设置表格的字体颜色和背景颜色
+
+```
+newItem = QTableWidgetItem("测试")  
+newItem.setBackgroundColor(QColor(0,60,10))  
+newItem.setTextColor(QColor(200,111,100))          
+self.MyTable.setItem(0, 0, newItem)  
+```
+
+## 9 移除当前选中行
+
+```
+int currow = ui.topics_table_->currentRow();
+if (currow == -1) {
+    return;
+}
+ui.topics_table_->removeRow(currow);
 ```
 
 

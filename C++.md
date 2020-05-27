@@ -68,6 +68,280 @@ cout << "Error in program.\n";
 
 
 
+# std::thread的使用
+
+1 添加头文件#include <thread>
+
+2 使用全局函数作为线程函数
+
+```
+#include <iostream>
+#include <thread>
+#include <string>
+using namespace  std;
+
+void ThreadFunc1()
+{
+    std::cout << "ThreadFunc1" << std::endl;
+}
+
+void ThreadFunc2(int data)
+{
+    std::cout << "ThreadFunc2"<<" "<<data << std::endl;
+}
+
+void ThreadFunc3(int data1,int data2,string str)
+{
+    std::cout << "ThreadFunc3" << " "<< data1 << " "<< data2 << " "<< str << std::endl;
+}
+
+int main()
+{
+    thread th1(ThreadFunc1);
+    th1.join();
+    int data1 = 10;
+    thread th2(ThreadFunc2,data1);
+    th2.join();
+    int data2 = 100;
+    string str = "StrTest";
+    thread th3(ThreadFunc3, data1,data2,str);
+    th3.join();
+    return 0;
+}
+```
+
+3 使用类成员函数作为线程函数
+
+```
+#include <iostream>
+#include <thread>
+#include <string>
+using namespace  std;
+
+
+class Foo
+{
+public:
+    void ThreadFunc1() {
+        std::cout << "ThreadFunc1" << std::endl;
+    }
+
+    void ThreadFunc2(int data1,int data2) {
+        std::cout << "ThreadFunc2" << " " << data1 << " " << data2 << std::endl;
+    }
+};
+
+int main()
+{
+    Foo foo;
+    thread th1(&Foo::ThreadFunc1,foo);
+    th1.join();
+    int data1 = 10,data2 = 100;
+     thread th2(&Foo::ThreadFunc2, foo,data1,data2);
+     th2.join();
+    return 0;
+}
+```
+
+4 使用lambda表达式作为线程函数
+
+```
+int main()
+{
+    thread th([] {while (1)
+    {
+        std::cout << "lambda" << endl;
+    }
+    });
+    while (1)
+    {
+        std::cout << "main" << endl;
+    }
+    th.join();
+    return 0;
+}
+```
+
+ 
+
+结果如下：
+
+![img](https://img2018.cnblogs.com/blog/1317399/201908/1317399-20190830174251237-598140311.png)
+
+ 5 leetcode练习
+
+题目描述：
+
+```
+public class Foo {
+  public void one() { print("one"); }
+  public void two() { print("two"); }
+  public void three() { print("three"); }
+}
+
+三个不同的线程将会共用一个 Foo 实例。
+
+线程 A 将会调用 one() 方法
+线程 B 将会调用 two() 方法
+线程 C 将会调用 three() 方法
+请设计修改程序，以确保 two() 方法在 one() 方法之后被执行，three() 方法在 two() 方法之后被执行。
+```
+
+ 
+
+```
+class Foo {
+public:
+    Foo() {
+        
+    }
+
+    void first(function<void()> printFirst) {
+        
+        // printFirst() outputs "first". Do not change or remove this line.
+     std::lock_guard<std::mutex> lock(mx_);
+      printFirst();
+      number_ = 1;
+    }
+
+    void second(function<void()> printSecond) {
+        
+        // printSecond() outputs "second". Do not change or remove this line.
+        while (1)
+      {
+          if (number_ == 1)
+          {
+              std::lock_guard<std::mutex> lock(mx_);
+              printSecond();
+              number_ = 2;
+              break;
+          }
+      }
+    }
+
+    void third(function<void()> printThird) {
+        
+        // printThird() outputs "third". Do not change or remove this line.
+       while (1)
+      {
+          if (number_ == 2)
+          {
+             std::lock_guard<std::mutex> lock(mx_);
+              printThird();
+              number_ = 3;
+              break;
+          }
+         
+      }
+    }
+    
+    std::mutex mx_;
+    int number_ = 0;
+};
+class Foo
+{
+public:
+    Foo(){}
+
+    void first(function<void()> printFirst)
+    {
+        // printFirst() outputs "first". Do not change or remove this line.
+        mx_.lock();
+        printFirst();
+        number_ = 1;
+        mx_.unlock();
+    }
+
+    void second(function<void()> printSecond)
+    {
+        // printSecond() outputs "second". Do not change or remove this line.
+        while (1)
+        {
+            if (number_ == 1)
+            {
+                mx_.lock();
+                printSecond();
+                number_ = 2;
+                mx_.unlock();
+                break;
+            }
+        }
+    }
+
+    void third(function<void()> printThird) 
+    {
+        // printThird() outputs "third". Do not change or remove this line.
+        while (1)
+        {
+            if (number_ == 2)
+            {
+                mx_.lock();
+                printThird();
+                number_ = 3;
+                mx_.unlock();
+                break;
+
+            }
+
+        }
+    }
+
+    std::mutex mx_;
+    int number_ = 0;
+};
+```
+
+ 
+
+```
+class Foo
+{//三个线程分别有各自的函数，可以不用加锁
+public:
+    Foo() {}
+
+    void first(function<void()> printFirst)
+    {
+        // printFirst() outputs "first". Do not change or remove this line.
+        printFirst();
+        number_ = 1;
+    }
+
+    void second(function<void()> printSecond)
+    {
+        // printSecond() outputs "second". Do not change or remove this line.
+        while (1)
+        {
+            if (number_ == 1)
+            {
+                printSecond();
+                number_ = 2;
+                break;
+            }
+        }
+    }
+
+    void third(function<void()> printThird)
+    {
+        // printThird() outputs "third". Do not change or remove this line.
+        while (1)
+        {
+            if (number_ == 2)
+            {
+                printThird();
+                number_ = 3;
+                break;
+
+            }
+
+        }
+    }
+
+    int number_ = 0;
+};
+```
+
+ 
+
 # 文件操作
 
 ## 判断文件夹是否存在并创建文件夹
