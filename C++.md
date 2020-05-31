@@ -34,6 +34,17 @@ gcc dlopentest.c -ldl
 
 
 
+# 获取环境变量的值
+
+```c++
+std::string java_home;
+char *pathvar;
+pathvar = getenv("JAVA_HOME");
+java_home = pathvar;
+std::cout << "java_home:" << java_home << std::endl;
+```
+
+
 # 获取当前目录
 
 ```

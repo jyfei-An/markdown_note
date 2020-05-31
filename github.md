@@ -13,6 +13,189 @@ googletest
 | `ASSERT_TRUE(condition);`  | `EXPECT_TRUE(condition);`  | `condition` is true  |
 | `ASSERT_FALSE(condition);` | `EXPECT_FALSE(condition);` | `condition` is false |
 
+# RapidXml
+
+```
+原项目github网址：https://github.com/dwd/rapidxml
+```
+
+```
+测试代码github项目网址：git@github.com:Mr-jiayunfei/githubtest.git
+```
+
+## 1 使用条件
+
+从github上下载源码，将文件目录包含在自己项目目录中，在源码文件中包含下面语句
+
+```C++
+#include <rapidxml.hpp>
+#include <rapidxml_print.hpp>
+#include <rapidxml_utils.hpp>
+
+using namespace rapidxml;
+```
+
+## 2 读取XML文件
+
+	bool ReadXML(const std::string& xml_full_name) 
+	{
+	bool rv = false;
+	
+	try 
+	{
+		rapidxml::file<> content(xml_full_name.c_str());
+	
+		xml_document<> doc;
+		doc.parse<0>(content.data());
+	
+		xml_node<char>* catelognode = doc.first_node(u8"catalog");
+		if (!catelognode) {
+			return false;
+		}
+	
+		for (auto it = catelognode->first_node("book"); it; it = it->next_sibling()) 
+		{
+			std::string bookid;
+			xml_attribute<> *att = it->first_attribute(u8"id");
+			if (att) {
+				bookid = att->value();
+				std::cout << "bookid:" << bookid << std::endl;
+			}
+	
+			xml_node<char>* authornode = it->first_node(u8"author");
+			if (!authornode) {
+				return false;
+			}
+			std::string authorname;
+			auto value = authornode->value();
+			if (value) {
+				if (strlen(value) != 0) {
+					authorname = value;
+					std::cout << "authorname:" << authorname << std::endl;
+				}
+			}
+	
+			xml_node<char>* titlenode = it->first_node(u8"title");
+			if (!titlenode) {
+				return false;
+			}
+			std::string titlename;
+			value = titlenode->value();
+			if (value) {
+				if (strlen(value) != 0) {
+					titlename = value;
+					std::cout << "titlename:" << titlename << std::endl;
+				}
+			}
+	
+			xml_node<char>* genrenode = it->first_node(u8"genre");
+			if (!genrenode) {
+				return false;
+			}
+			std::string genrename;
+			value = genrenode->value();
+			if (value) {
+				if (strlen(value) != 0) {
+					genrename = value;
+					std::cout << "genrename:" << genrename << std::endl;
+				}
+			}
+			
+		}
+	}
+	catch (const parse_error& e) {
+		std::string error_info = u8"解析XML出错，";
+		error_info += e.what();
+		return false;
+	}
+	catch (const std::exception& e) {
+		std::string error_info = u8"解析XML出错，";
+		error_info += e.what();
+		return false;
+	}
+	catch (...) {
+		return false;
+	}
+	
+	return true;
+	}
+## 3 写入XML文件
+
+	bool WriteXML(const std::string& xml_full_name) {
+	xml_document<char> doc;
+	
+	///声明
+	xml_node<> *decl_node = doc.allocate_node(node_declaration);
+	decl_node->append_attribute(doc.allocate_attribute(u8"version", u8"1.0"));
+	decl_node->append_attribute(doc.allocate_attribute(u8"encoding", u8"UTF-8"));
+	doc.append_node(decl_node);
+	
+	xml_node<> *catalog_node = doc.allocate_node(node_element,
+		u8"catalog");
+	doc.append_node(catalog_node);
+	
+	for (int i=0;i<3;++i)
+	{
+		xml_node<> *book_node = doc.allocate_node(node_element, u8"book ");
+		book_node->append_attribute(doc.allocate_attribute(u8"id","boolid"));
+	
+		xml_node<> *author_node = doc.allocate_node(node_element, u8"author ");
+		author_node->append_node(doc.allocate_node(node_data, "","authorname"));
+		book_node->append_node(author_node);
+	
+		xml_node<> *title_node = doc.allocate_node(node_element, u8"title ");
+		title_node->append_node(doc.allocate_node(node_data, "", "titlename"));
+		book_node->append_node(title_node);
+	
+		xml_node<> *genre_node = doc.allocate_node(node_element, u8"genre ");
+		genre_node->append_node(doc.allocate_node(node_data, "", "genrename"));
+		book_node->append_node(genre_node);
+	
+		catalog_node->append_node(book_node);
+	}
+	
+	std::ofstream out(xml_full_name);
+	out << doc;
+	out.close();
+	
+	doc.clear();
+	
+	return true;
+	}
+## 4 修改XML文件
+
+
+	bool ModifyNodeValue(const std::string& xml_full_name, const std::string& node_name, const std::string& node_value) {
+	rapidxml::file<> content(xml_full_name.c_str());
+	
+	xml_document<> doc;
+	doc.parse<rapidxml::parse_no_data_nodes>(content.data());
+	
+	xml_node<>* catelog_node = doc.first_node(u8"catalog");
+	if (!catelog_node) {
+		return false;
+	}
+	xml_node<>* book_node = catelog_node->first_node(u8"book");
+	if (!book_node) {
+		return false;
+	}
+	xml_node<>* author_node = book_node->first_node(u8"author");
+	if (!author_node) {
+		return false;
+	}
+	
+	const std::string author_name = node_value;
+	const char * text = doc.allocate_string(author_name.c_str(), strlen(author_name.c_str()));
+	author_node->value(text);
+	
+	std::string data;
+	rapidxml::print(std::back_inserter(data), doc);
+	
+	std::ofstream out(xml_full_name);
+	out << data;
+	out.close();
+	}
+
 
 
 # nlohmann/json
@@ -139,3 +322,31 @@ void TestWriteJson() {
 ```
 
  
+
+# youtube-dl
+
+```
+github网址:https://github.com/ytdl-org/youtube-dl
+```
+
+1 首先需要安装python，默认安装即可
+
+2 使用管理员身份打开cmd窗口（不使用管理员身份打开后续安装会报错）
+
+3 使用如下命令进行安装youtube-dl
+
+```
+pip install --upgrade youtube-dl
+```
+
+4 安装完成后，使用该工具下载youtube视频
+
+```
+example：
+youtube-dl  https://www.youtube.com/watch?v=zERp1IJ0R4U&t=2787s
+```
+
+注：默认下载安装为最优视频格式，没有特殊要求的直接在后面加上url即可下载
+
+
+
