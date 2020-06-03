@@ -79,6 +79,28 @@ cout << "Error in program.\n";
 
 
 
+# std::string的使用
+
+## Split
+
+```c++
+#include <sstream>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<string> strings;
+    istringstream f("denmark;sweden;india;us");
+    string s;    
+    while (getline(f, s, ';')) {
+        cout << s << endl;
+        strings.push_back(s);
+    }
+}
+```
+
 # std::thread的使用
 
 1 添加头文件#include <thread>

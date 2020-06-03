@@ -2,13 +2,9 @@
 
 ## dlopen
 
+<img src="E:\mygithub\markdown_note\images\1550546129_560350.png" alt="img" style="zoom:50%;" />
 
-
-<img src="E:\markdown_note\images\image-20200528223656103.png" alt="image-20200528223656103" style="zoom:50%;" />
-
-
-
-<img src="E:\markdown_note\images\image-20200528223720891.png" alt="image-20200528223720891" style="zoom:50%;" />
+<img src="E:\mygithub\markdown_note\images\1550546129_911639.png" alt="img" style="zoom:50%;" />
 
 # typeora侧边折叠显示
 
@@ -41,9 +37,17 @@ mspaint
 # 查看谷歌浏览器保存的密码
 
 1. 打开浏览器,点击右上角
-
 2. 点击设置
 3. 点击”自动填充“
 4. 点击“密码”
 5. 查看密码
+
+# XML转义字符
+
+| &lt;   | <    | 小于号 |
+| ------ | ---- | ------ |
+| &gt;   | >    | 大于号 |
+| &amp;  | &    | 和     |
+| &apos; | '    | 单引号 |
+| &quot; | "    | 双引号 |
 

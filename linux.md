@@ -1,3 +1,9 @@
+# GDB调试
+
+```
+https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html
+```
+
 # linux 常用工具
 
 ```
@@ -8,6 +14,12 @@ https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html
 
 ```
 Ctrl+Shift+T
+```
+
+## 打开多个文件窗口
+
+```
+ctrl+t
 ```
 
 ## fsearch搜索工具
@@ -46,6 +58,12 @@ sudo lsb_release -a
 
 ```
 cp  源文件(source) 目标文件(destination)
+```
+
+## 复制文件夹cp -r
+
+```
+cp  -r 源文件夹(source) 目标文件夹(destination)
 ```
 
 ## 文件移动mv
