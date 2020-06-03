@@ -4,6 +4,12 @@
 https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html
 ```
 
+# 安装中文输入法
+
+```
+https://www.pinyinjoe.com/linux/ubuntu-18-gnome-chinese-setup.htm
+```
+
 # linux 常用工具
 
 ```

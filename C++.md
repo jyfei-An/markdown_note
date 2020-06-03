@@ -4,6 +4,12 @@
 
 ## linux
 
+### /usr/local/bin/cmake/cmake 不存在（远程调试）
+
+```
+sudo ln -s /usr/bin/cmake /usr/local/bin/cmake
+```
+
 ### usr/bin/ld: cannot find -l
 
 ```
@@ -30,6 +36,37 @@ target_link_libraries(testlink ${CMAKE_DL_LIBS}
 
 ```
 gcc dlopentest.c -ldl
+```
+
+
+
+# 计算函数调用时间
+
+```cpp
+#include <iostream>
+#include <chrono>
+
+void function()
+{
+    long long number = 0;
+
+    for( long long i = 0; i != 2000000; ++i )
+    {
+       number += 5;
+    }
+}
+
+int main()
+{
+    auto t1 = std::chrono::high_resolution_clock::now();
+    function();
+    auto t2 = std::chrono::high_resolution_clock::now();
+
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+
+    std::cout << duration;
+    return 0;
+}
 ```
 
 

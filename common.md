@@ -1,3 +1,9 @@
+# 安装ubuntu双系统
+
+```
+https://www.cnblogs.com/masbay/p/11627727.html
+```
+
 # VS2017 开发linux项目
 
 ## dlopen
