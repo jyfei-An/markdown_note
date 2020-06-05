@@ -12,6 +12,12 @@ https://stackoverflow.com/questions/46684230/visualstudio-build-tools-2017-offli
 
 
 
+# ubuntu安装docker
+
+```
+https://docs.docker.com/engine/install/ubuntu/
+```
+
 # DockerFile
 
 

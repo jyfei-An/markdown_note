@@ -1,3 +1,19 @@
+# vmware桥接模式下主机与虚拟机相互ping不通的几种情况
+
+```
+https://blog.csdn.net/sj_djw/article/details/98504180?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase
+```
+
+
+
+# VMware的三种网络模式
+
+```
+https://zhuanlan.zhihu.com/p/24758022
+```
+
+
+
 # 安装ubuntu双系统
 
 ```
@@ -50,10 +66,4 @@ mspaint
 
 # XML转义字符
 
-| &lt;   | <    | 小于号 |
-| ------ | ---- | ------ |
-| &gt;   | >    | 大于号 |
-| &amp;  | &    | 和     |
-| &apos; | '    | 单引号 |
-| &quot; | "    | 双引号 |
-
+![image-20200605233225816](E:\mygithub\markdown_note\images\image-20200605233225816.png)

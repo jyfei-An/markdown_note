@@ -1,3 +1,12 @@
+# How To Fix System Program Problem Detected In Ubuntu
+
+```
+sudo gedit /etc/default/apport
+
+Change the enabled=1 to enabled=0. Save and close the file. You won’t see any pop up for crash reports after doing this. Obvious to point out that if you want to enable the crash reports again, you just need to change the same file and put enabled as 1 again.
+
+```
+
 # GDB调试
 
 ```
