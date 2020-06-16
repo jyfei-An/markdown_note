@@ -1,3 +1,7 @@
+# unity Sorry, this link is no longer valid
+
+关闭小飞机代理，重新启动uinty
+
 # A*寻路算法
 
 1. 创建地面，如plane

@@ -41,6 +41,22 @@ ssh-keygen -C 'youremail@163.com' -t rsa
 
 # Git命令
 
+## 更改仓库地址
+
+```
+git remote set-url origin 新的项目地址
+```
+
+
+
+## 查看远程仓库地址
+
+```
+git remote -v
+```
+
+
+
 ## 创建+切换分支
 
 ```

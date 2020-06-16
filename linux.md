@@ -55,6 +55,14 @@ GParted
  sudo  dpkg  -i  package.deb
 ```
 
+# 查看deb文件内容
+
+```
+dpkg  -c package.deb 
+```
+
+
+
 # linux常用命令
 
 ## 查看动态库依赖性
