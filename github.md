@@ -23,6 +23,93 @@ googletest
 测试代码github项目网址：git@github.com:Mr-jiayunfei/githubtest.git
 ```
 
+```
+用户手册：http://rapidxml.sourceforge.net/manual.html#classrapidxml_1_1memory__pool_95c49fcb056e9103ec906a59e3e01d76_195c49fcb056e9103ec906a59e3e01d76
+```
+
+
+
+## XML文件编码声明
+
+```
+xml_node<> *decl_node = writedoc.allocate_node(node_declaration);
+decl_node->append_attribute(writedoc.allocate_attribute(u8"version", u8"1.0"));
+decl_node->append_attribute(writedoc.allocate_attribute(u8"encoding", u8"UTF-8"));
+writedoc.append_node(decl_node);
+```
+
+## 情况1(只有node)：
+
+```
+<person>
+		<Name>yunfei</Name>
+		<birthday>2019-12-11 19:37:58.854</birthday>
+</person>
+```
+
+### 读：
+
+```
+xml_node<char>* personnode= doc.first_node(u8"person");
+if (!personnode) {
+return false;
+}
+xml_node<char>* Namenode= personnode->first_node(u8"Name");
+if (!Namenode) {
+return false;
+}
+std::string authorname;
+auto value = Namenode->value();
+if (value) {
+if (strlen(value) != 0) {
+authorname = value;
+}
+}
+```
+
+### 写：
+
+```
+xml_node<> *Namenode= doc.allocate_node(node_element, u8"Name");
+Namenode->append_node(doc.allocate_node(node_data, "","yunfei"));
+personnode->append_node(author_node);
+```
+
+
+
+## 情况2（有attribute）
+
+```
+<person id="01" gender="man">
+		<Name>yunfei</Name>
+		<birthday>2019-12-11 19:37:58.854</birthday>
+</person>
+```
+
+### 读：
+
+```
+xml_node<char>* personnode= doc.first_node(u8"person");
+if (!personnode) {
+return false;
+}
+xml_attribute<> *att = personnode->first_attribute(u8"id");
+if (att) {
+auto id = att->value();
+std::cout << "id:" << id << std::endl;
+}
+```
+
+### 写：
+
+```
+xml_node<> *personnode= doc.allocate_node(node_element, u8"person");
+personnode->append_attribute(doc.allocate_attribute(u8"id","01"));
+personnode->append_attribute(doc.allocate_attribute(u8"gender","man"));
+```
+
+
+
 ## 1 使用条件
 
 从github上下载源码，将文件目录包含在自己项目目录中，在源码文件中包含下面语句
@@ -162,7 +249,7 @@ using namespace rapidxml;
 	
 	return true;
 	}
-## 4 修改XML文件
+## 4 修改XML文件（注意parse模板参数）
 
 
 	bool ModifyNodeValue(const std::string& xml_full_name, const std::string& node_name, const std::string& node_value) {
@@ -195,6 +282,21 @@ using namespace rapidxml;
 	out << data;
 	out.close();
 	}
+
+## 5 复制节点
+
+```
+xml_node<Ch>* clone_node(const xml_node< Ch > *source, xml_node< Ch > *result=0);
+xml_node<char>* clonenode = readdoc.clone_node(node1);
+```
+
+
+
+## 6 插入节点
+
+```
+void insert_node(xml_node< Ch > *where, xml_node< Ch > *child);
+```
 
 
 

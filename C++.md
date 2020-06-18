@@ -116,6 +116,55 @@ cout << "Error in program.\n";
 
 
 
+# 随机数生成
+
+## rand函数
+
+在函数的开始处调用下面语句设置随机数种子
+
+```c++
+#include <cstdlib>
+#include <ctime>
+srand (static_cast <unsigned> (time(0)));
+```
+
+```cpp
+double randMToN(double M, double N)
+{
+    return M + (rand() / ( RAND_MAX / (N-M) ) ) ;  
+}
+```
+
+缺点：rand函数精度较低，最大随机数为65536，随机浮点数精度可能不足
+
+![image-20200618231527979](.images/image-20200618231527979.png)
+
+## C++11random
+
+```cpp
+#include <random>
+#include <iostream>
+ 
+int main()
+{
+    std::random_device rd;  // 将用于获得随机数引擎的种子
+    std::mt19937 gen(rd()); // 以 rd() 播种的标准 mersenne_twister_engine
+    //随机浮点数生成器
+    std::uniform_real_distribution<> dis(1, 2);
+    for (int n = 0; n < 10; ++n) {
+        // 用 dis 变换 gen 生成的随机 unsigned int 为 [1, 2) 中的 double
+        std::cout << dis(gen) << ' '; // 每次调用 dis(gen) 都生成新的随机 double
+    }
+    std::cout << '\n';
+}
+```
+
+![image-20200618231419676](.images/image-20200618231419676.png)
+
+
+
+
+
 # std::string的使用
 
 ## Split
@@ -137,6 +186,31 @@ int main() {
     }
 }
 ```
+
+## double 转string
+
+1. tostring
+
+   std:to_string()方法只能精确到6位小数点
+
+       double d = 3.1415926535897932384;
+       std::string str = std::to_string(d);
+       std::cout << str << std::endl; // 3.141593
+
+2. 使用stringstream，在输入流时使用setprecision设置精度（精度为15位）。
+
+   ```c++
+   #include <sstream>
+   #include <iomanip>
+   
+   double d = 3.1415926535897932384;
+   std::string str;
+   std::stringstream ss;
+   ss << std::setprecision(15) << d;
+   str = ss.str();  // 3.14159265358979
+   ```
+
+   
 
 # std::thread的使用
 

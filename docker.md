@@ -182,8 +182,6 @@ docker images
 
 
 
-
-
 # 修改docker镜像和容器存储位置
 
 ```json
