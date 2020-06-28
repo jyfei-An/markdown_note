@@ -446,7 +446,7 @@ public AudioClip[] clips = new AudioClip[3];
 ## 判断两个坐标的位置
 
 ```
-vector3.Distance(position1,position2);
+Vector3.Distance(position1,position2);
 ```
 
 
@@ -491,6 +491,8 @@ if(Input.GetMouseButtonDown(0))
 ```
 
 
+
+![image-20200627195614007](images/image1.png)
 
 ## 使用unity中的ui物件
 

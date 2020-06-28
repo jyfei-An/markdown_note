@@ -49,16 +49,26 @@ https://www.addictivetips.com/ubuntu-linux-tips/fsearch-find-files-on-linux/
 GParted
 ```
 
-# 安装deb文件
+
+
+# Deb文件操作
+
+## 安装deb文件
 
 ```
  sudo  dpkg  -i  package.deb
 ```
 
-# 查看deb文件内容
+## 查看deb文件内容
 
 ```
 dpkg  -c package.deb 
+```
+
+## 解压deb文件
+
+```
+dpkg -x package.deb 
 ```
 
 

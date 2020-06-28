@@ -1,3 +1,7 @@
+
+
+
+
 # linux下安装打开cmkae界面
 
 1. sudo apt-get install cmake-qt-gui
@@ -22,9 +26,98 @@ https://github.com/ttroy50/cmake-examples.git
 | CMAKE_CURRENT_BINARY_DIR | The build directory you are currently in.                    |
 | PROJECT_BINARY_DIR       | The build directory for the current project.                 |
 
+# CPack
+
+## IFW（跨平台的打包工具）
+
+QTIFWDIR=/home/jiayunfe/Qt/QtIFW-3.2.2
+
+# CMake Install
+
+## install 安装文件目录
+
+```
+install(TARGETS <target>... [...])
+install({FILES | PROGRAMS} <file>... [...])
+install(DIRECTORY <dir>... [...])
+install(SCRIPT <file> [...])
+install(CODE <code> [...])
+install(EXPORT <export-name> [...])
+```
+
+## install命令参数
+
+```
+install(<FILES|PROGRAMS> files...
+        TYPE <type> | DESTINATION <dir>
+        [PERMISSIONS permissions...]
+        [CONFIGURATIONS [Debug|Release|...]]
+        [COMPONENT <component>]
+        [RENAME <name>] [OPTIONAL] [EXCLUDE_FROM_ALL])
+```
+
+DESTINATION：指定磁盘上要安装文件的目录；
+PERMISSIONS：指定安装文件的权限。有效权限是OWNER_READ，OWNER_WRITE，OWNER_EXECUTE，GROUP_READ，GROUP_WRITE，GROUP_EXECUTE，WORLD_READ，WORLD_WRITE，WORLD_EXECUTE，SETUID和SETGID；
+CONFIGURATIONS：指定安装规则适用的构建配置列表(DEBUG或RELEASE等)；
+EXCLUDE_FROM_ALL：指定该文件从完整安装中排除，仅作为特定于组件的安装的一部分进行安装；
+OPTIONAL：如果要安装的文件不存在，则指定不是错误；
+RENAME：指定已安装文件的名称，该名称可能与原始文件不同。仅当命令安装了单个文件时，才允许重命名。
+
+## DESTINATION安装路径
+
+不同的`TYPE`，`cmake`也提供了默认的安装路径
+
+| TYPE类型 | 安装目录变量                | 默认安装文件夹 |
+| -------- | --------------------------- | -------------- |
+| BIN      | ${CMAKE_INSTALL_BINDIR}     | bin            |
+| SBIN     | ${CMAKE_INSTALL_SBINDIR}    | sbin           |
+| LIB      | ${CMAKE_INSTALL_LIBDIR}     | lib            |
+| INCLUDE  | ${CMAKE_INSTALL_INCLUDEDIR} | include        |
+| SYSCONF  | ${CMAKE_INSTALL_SYSCONFDIR} | etc            |
+| INFO     | ${CMAKE_INSTALL_INFODIR}    | /info          |
+
+
+​		
+
 # CMake 常用命令
 
-## Minimum CMake version
+## 添加FPIC选项
+
+```
+https://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option
+```
+
+You can set the position independent code property on all targets:
+
+```
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+```
+
+or in a specific library:
+
+```
+add_library(lib1 SHARED lib1.cpp)
+set_property(TARGET lib1 PROPERTY POSITION_INDEPENDENT_CODE ON)
+```
+
+
+
+## 将生成文件拷贝到指定目录
+
+```cmake
+#复制文件到执行目录
+if(WIN32)
+ADD_CUSTOM_COMMAND(TARGET ${CURRENT_PROJ_NAME} POST_BUILD COMMAND xcopy $(TargetPath) $(OutDir)TestDir\\Dir\\ /Y)
+endif(WIN32)
+
+if(UNIX)
+#拼接字符串
+string(CONCAT exename "lib" "${CURRENT_PROJ_NAME}.so")
+ADD_CUSTOM_COMMAND(TARGET ${CURRENT_PROJ_NAME} POST_BUILD COMMAND cp ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${exename}  ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/TestDir/Dir/ )
+endif(UNIX)
+```
+
+## 设置CMake最低版本
 
 设置CMake最低版本要求
 
@@ -149,25 +242,6 @@ else()
   install(TARGETS ${NAME}
     LIBRARY DESTINATION path)
 endif()   
-```
-
-## 添加FPIC选项
-
-```
-https://stackoverflow.com/questions/38296756/what-is-the-idiomatic-way-in-cmake-to-add-the-fpic-compiler-option
-```
-
-You can set the position independent code property on all targets:
-
-```
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-```
-
-or in a specific library:
-
-```
-add_library(lib1 SHARED lib1.cpp)
-set_property(TARGET lib1 PROPERTY POSITION_INDEPENDENT_CODE ON)
 ```
 
 ## ExternalProject_Add

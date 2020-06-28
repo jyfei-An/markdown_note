@@ -1,10 +1,22 @@
+#  ./configure
 
+## 添加FPIC选项
 
-googletest
+https://stackoverflow.com/questions/629961/how-can-i-set-ccshared-fpic-while-executing-configure
 
+```
+./configure --enable-shared
+```
 
+## 设置安装目录
 
-### Basic Assertions
+```
+./configure --prefix=/localdir/
+```
+
+# googletest
+
+## Basic Assertions
 
 进行基本的真/假条件测试。
 
