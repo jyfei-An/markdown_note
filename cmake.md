@@ -1,3 +1,18 @@
+# 常见问题
+
+## 1 dlopen | pthread 
+
+动态库依赖pthread，使用dlopen加载动态库出现段错误
+
+```cpp
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--no-as-needed")
+target_link_libraries(test pthread dl)
+```
+
+https://github.com/belveder79/broken
+
+
+
 
 
 
@@ -30,7 +45,31 @@ https://github.com/ttroy50/cmake-examples.git
 
 ## IFW（跨平台的打包工具）
 
+### 设置环境变量
+
 QTIFWDIR=/home/jiayunfe/Qt/QtIFW-3.2.2
+
+### Qt Installer Framework doc
+
+https://doc.qt.io/qtinstallerframework/ifw-overview.html
+
+### Qt Installer Framework how to use in windows
+
+https://www.youtube.com/watch?v=1pKMcwJZay4
+
+### Qt Installer Framework how to use in linux
+
+https://www.youtube.com/watch?v=2B--nzfoQ9s
+
+### linuxdeployqt
+
+将qt的exe所需动态库拷贝到文件夹中进行打包（github上下载appimage），可参考
+
+https://www.youtube.com/watch?v=2B--nzfoQ9s
+
+example：
+
+待添加
 
 # CMake Install
 

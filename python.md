@@ -10,6 +10,16 @@ update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 
 
+# if...else
+
+```
+var = False
+if not var:
+    print 'learnt stuff'
+```
+
+
+
 # 获取当前目录
 
 ```

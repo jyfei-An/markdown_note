@@ -71,15 +71,44 @@ dpkg  -c package.deb
 dpkg -x package.deb 
 ```
 
+## 查看安装文件目录
 
+```
+dpkg -L packagename
+```
+
+dpkg -L +软件包的名字，可以知道这个软件包包含了哪些文件， 这个方法可以列出所有安装后留在系统里的文件
 
 # linux常用命令
+
+## 清空回收站
+
+```
+sudo rm -rf ~/.local/share/Trash/*
+```
 
 ## 查看动态库依赖性
 
 ```
 ldd 动态库名字
 ```
+
+## 把ldd查询到的所有需要的库导出
+
+这里提供一个脚本将ldd打印出来的依赖库复制到指定路径：
+
+```
+#!/bin/sh
+
+exe="test" #发布的程序名称
+des="/home/hejianglin/QtProject/build-test-Desktop-Release/ReleaseTest" #你的路径
+
+deplist=$(ldd $exe | awk  '{if (match($3,"/")){ printf("%s "),$3 } }')
+cp $deplist $des
+```
+
+说明：exe ：要发布的程序名称 des：指定复制的路径 
+
 
 ## 查看ubuntu系统版本
 

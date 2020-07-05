@@ -116,6 +116,72 @@ cout << "Error in program.\n";
 
 
 
+# 获取环境变量
+
+```
+https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/getenv-s-wgetenv-s?view=vs-2019
+```
+
+example：
+
+```
+// crt_getenv_s.c
+// This program uses getenv_s to retrieve
+// the LIB environment variable and then uses
+// _putenv to change it to a new value.
+
+#include <stdlib.h>
+#include <stdio.h>
+
+int main( void )
+{
+   char* libvar;
+   size_t requiredSize;
+
+   getenv_s( &requiredSize, NULL, 0, "LIB");
+   if (requiredSize == 0)
+   {
+      printf("LIB doesn't exist!\n");
+      exit(1);
+   }
+
+   libvar = (char*) malloc(requiredSize * sizeof(char));
+   if (!libvar)
+   {
+      printf("Failed to allocate memory!\n");
+      exit(1);
+   }
+
+   // Get the value of the LIB environment variable.
+   getenv_s( &requiredSize, libvar, requiredSize, "LIB" );
+
+   printf( "Original LIB variable is: %s\n", libvar );
+
+   // Attempt to change path. Note that this only affects
+   // the environment variable of the current process. The command
+   // processor's environment is not changed.
+   _putenv_s( "LIB", "c:\\mylib;c:\\yourlib" );
+
+   getenv_s( &requiredSize, NULL, 0, "LIB");
+
+   libvar = (char*) realloc(libvar, requiredSize * sizeof(char));
+   if (!libvar)
+   {
+      printf("Failed to allocate memory!\n");
+      exit(1);
+   }
+
+   // Get the new value of the LIB environment variable.
+   getenv_s( &requiredSize, libvar, requiredSize, "LIB" );
+
+   printf( "New LIB variable is: %s\n", libvar );
+
+   free(libvar);
+}
+```
+
+
+
 # 随机数生成
 
 ## rand函数
