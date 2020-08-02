@@ -1,3 +1,35 @@
+# 鼠标控制摄像机视野方向大小
+
+```c#
+void Update()
+{
+    // 滚轮实现镜头缩进和拉远
+    if (Input.GetAxis("Mouse ScrollWheel") != 0)
+    {
+        Camera.main.fieldOfView = Camera.main.fieldOfView - Input.GetAxis("Mouse ScrollWheel") * sensitivetyMouseWheel;
+        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, near, far);
+    }
+    //鼠标右键实现视角转动
+    if (Input.GetMouseButton(1))
+    {
+        float rotationX = Input.GetAxis("Mouse X") * sensitivityX;
+        float rotationY = Input.GetAxis("Mouse Y") * sensitivityY;
+        transform.Rotate(-rotationY, rotationX,0 );
+    }
+    //键盘按钮←和→实现视角水平旋转
+    if (Input.GetAxis("Horizontal") !=0)
+    {
+        float rotationZ = Input.GetAxis("Horizontal") * sensitivetyZ;
+        transform.Rotate(0,0 , rotationZ);
+    }
+   
+}
+```
+
+
+
+
+
 # unity Sorry, this link is no longer valid
 
 关闭小飞机代理，重新启动uinty

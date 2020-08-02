@@ -1,3 +1,21 @@
+## Jupyter Notebook快捷键
+
+Alt-Enter : 运行本单元，在其下插入新单元
+
+```
+https://blog.csdn.net/lawme/article/details/51034543
+```
+
+
+
+# anaconda基础教程
+
+```
+https://docs.anaconda.com/anaconda/user-guide/getting-started/
+```
+
+
+
 # vmware桥接模式下主机与虚拟机相互ping不通的几种情况
 
 ```

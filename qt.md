@@ -1,3 +1,11 @@
+# qt翻译
+
+无法翻译自带的messagebox等控件，可参考下面github链接
+
+https://github.com/wisaly/qtbase_zh
+
+
+
 # 获取发送信号物体
 
 ```

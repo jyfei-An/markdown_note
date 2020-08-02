@@ -1,3 +1,16 @@
+# string转成int类型
+
+
+int num = 0;
+
+string str = "123";
+
+1. num = int.Parse(str);
+
+2. int.TryParse(str, out num);
+
+3. num = Convert.ToInt32(str);
+
 # C#调用C++动态库
 
 If the C++ library function returns `char*`, C# code will treat it as `IntPtr` and `Marshal.PtrToStringAnsi()` will convert it into C# `string`.

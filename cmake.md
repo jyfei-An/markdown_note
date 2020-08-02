@@ -71,6 +71,99 @@ example：
 
 待添加
 
+
+
+## Deb
+
+example：https://github.com/Mr-jiayunfei/githubtest/tree/master/cpack_deb
+
+```
+cmake_minimum_required(VERSION 3.12.2)
+
+project (addnum)
+
+add_library(addnum STATIC src/add_num.cpp)
+target_include_directories( addnum 
+    PUBLIC
+        "${CMAKE_CURRENT_SOURCE_DIR}/include"
+)
+
+add_executable(addnumapp src/main.cpp)
+target_link_libraries(addnumapp addnum)
+
+install(TARGETS addnumapp
+    COMPONENT linapp
+    RUNTIME DESTINATION "/home/"
+    LIBRARY DESTINATION "/home/"
+    DESTINATION "/home/"
+)
+
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "KK") #required
+INCLUDE(CPack)
+```
+
+
+
+# CMake_qt
+
+example：https://github.com/Mr-jiayunfei/githubtest/tree/master/cmake_qt_test
+
+```
+cmake_minimum_required(VERSION 3.5)
+
+project (TestWidget)
+
+set(CMAKE_PREFIX_PATH D:/software/Qt5.11.2/5.11.2/msvc2017_64)
+
+
+FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5Gui REQUIRED)
+FIND_PACKAGE(Qt5Widgets REQUIRED)
+
+
+SET(TESTWIDGET_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/TestWidget.cpp
+)
+
+
+SET(TESTWIDGET_HEADERS
+	${CMAKE_CURRENT_SOURCE_DIR}/TestWidget.h	
+)
+
+set (MyProjectLib_ui  ${PROJECT_SOURCE_DIR}/TestWidget.ui)
+
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
+
+SET(IMAGE_RCCS ${CMAKE_CURRENT_SOURCE_DIR}/TestWidget.qrc)
+QT5_ADD_RESOURCES(IMAGE_RCC_SRCS ${IMAGE_RCCS})
+
+INCLUDE_DIRECTORIES(
+    ${CMAKE_CURRENT_BINARY_DIR}	
+)
+
+LINK_DIRECTORIES( ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} )
+
+
+#生成exe,WIN32会自动生成窗口程序，不加win32也可以显示窗口，不过同时也会显示一个Doc窗口
+#ADD_EXECUTABLE(TestWidget WIN32 ${TESTWIDGET_HEADERS} ${TESTWIDGET_SRCS} ${IMAGE_RCC_SRCS} ${TESTWIDGET_MOC_SRCS} ${TESTWIDGET_MOC_HEADERS} ${TESTWIDGET_UI_MOC_SRCS} ${QM_FILES} )
+ADD_EXECUTABLE(TestWidget  ${TESTWIDGET_HEADERS} ${TESTWIDGET_SRCS}  ${MyProjectLib_ui} ${IMAGE_RCC_SRCS}  ${QM_FILES} )
+
+TARGET_LINK_LIBRARIES( TestWidget  
+  ${Qt5Widgets_LIBRARIES}
+  ${Qt5Core_QTMAIN_LIBRARIES}
+)
+
+SET_PROPERTY(TARGET TestWidget PROPERTY CXX_STANDARD 17)
+
+```
+
+
+
 # CMake Install
 
 ## install 安装文件目录
