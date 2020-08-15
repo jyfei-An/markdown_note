@@ -7,6 +7,57 @@ Change the enabled=1 to enabled=0. Save and close the file. You won’t see any 
 
 ```
 
+
+
+# 更改ubuntu语言设置
+
+1.  如设置中文utf-8格式，添加第一个脚本文件，设置英文utf-8格式。添加第二个脚本文件
+
+language_chinese.sh
+
+```
+export LANG="zh_CN.UTF-8"
+export LANGUAGE="zh_CN.UTF-8"
+export LC_CTYPE="zh_CN.UTF-8"
+export LC_NUMERIC="zh_CN.UTF-8"
+export LC_TIME="zh_CN.UTF-8"
+export LC_COLLATE="zh_CN.UTF-8"
+export LC_MONETARY="zh_CN.UTF-8"
+export LC_MESSAGES="zh_CN.UTF-8"
+export LC_PAPER="zh_CN.UTF-8"
+export LC_NAME="zh_CN.UTF-8"
+export LC_ADDRESS="zh_CN.UTF-8"
+export LC_TELEPHONE="zh_CN.UTF-8"
+export LC_MEASUREMENT="zh_CN.UTF-8"
+export LC_IDENTIFICATION="zh_CN.UTF-8"
+export LC_ALL=zh_CN.UTF-8
+```
+
+language_english.sh
+
+```
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_PAPER="en_US.UTF-8"
+export LC_NAME="en_US.UTF-8"
+export LC_ADDRESS="en_US.UTF-8"
+export LC_TELEPHONE="en_US.UTF-8"
+export LC_MEASUREMENT="en_US.UTF-8"
+export LC_IDENTIFICATION="en_US.UTF-8"
+export LC_ALL=en_US.UTF-8
+```
+
+
+
+2. 将脚本移动到/etc/profile.d/目录下
+3. 重新启动电脑
+
 # GDB调试
 
 ```

@@ -64,15 +64,29 @@ Captura
 mspaint
 ```
 
+# 虚拟机相关
 
+## 查看系统安装的虚拟机
 
-# 虚拟机全屏显示
+f9 打开虚拟机库，里面有你安装过的虚拟机
+
+## 虚拟机全屏显示
 
 1. 点开菜单栏的 虚拟机---------> 安装VMware Tools
 2. 将下载文件拷贝到其他目录中，右键extract here
 3. 在终端中输入：sudo perl vmware-install.pl，一直点击回车，完成安装
 
 
+
+# Notepad++格式化XML文件
+
+Try Plugins -> XML Tools -> Pretty Print (libXML) or (XML only - with line breaks Ctrl + Alt + Shift + B)
+
+You may need to install XML Tools using your plugin manager in order to get this option in your menu.
+
+In my experience, libXML gives nice output but only if the file is 100% correctly formed.
+
+https://stackoverflow.com/questions/3961217/how-do-i-format-xml-in-notepad
 
 # 查看谷歌浏览器保存的密码
 

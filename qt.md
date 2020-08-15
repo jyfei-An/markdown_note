@@ -1,3 +1,46 @@
+# qInstallFrameWork
+
+## 使用方法
+
+windows
+
+```
+..\..\bin\binarycreator.exe -c config\config.xml -p packages YourInstaller.exe
+```
+
+linux
+
+```
+/home/jiayunfe/Qt/QtIFW-3.2.2/bin/binarycreator -c config/config.xml -p packages 12YSim0.1.19.run
+```
+
+
+
+## windows下exe增加桌面快捷方式
+
+```cpp
+Component.prototype.createOperations = function()
+{
+    try {
+        // call the base create operations function
+        component.createOperations();
+        if (installer.value("os") == "win") { 
+            try {
+                var userProfile = installer.environmentVariable("USERPROFILE");
+                installer.setValue("UserProfile", userProfile);
+                component.addOperation("CreateShortcut", "@TargetDir@\\MiamPlayer.exe", "@UserProfile@\\Desktop\\MiamPlayer.lnk");
+            } catch (e) {
+                // Do nothing if key doesn't exist
+            }
+        }
+    } catch (e) {
+        print(e);
+    }
+}
+```
+
+
+
 # qt翻译
 
 无法翻译自带的messagebox等控件，可参考下面github链接

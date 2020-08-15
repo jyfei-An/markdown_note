@@ -13,9 +13,28 @@ https://github.com/belveder79/broken
 
 
 
+## 2 linux （experimental/filesystem）
 
+```perl
+cmake_minimum_required(VERSION 3.7)
 
+project(testcpp)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# NOTE: The following would add library with absolute path
+#       Which is bad for your projects cross-platform capabilities
+#       Just let the linker search for it
+#add_library(stdc++fs UNKNOWN IMPORTED)
+#set_property(TARGET stdc++fs PROPERTY IMPORTED_LOCATION "/usr/lib/gcc/x86_64-linux-gnu/7/libstdc++fs.a")
+
+set(SOURCE_FILES main.cpp)
+add_executable(testcpp ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} stdc++fs)
+```
+
+https://stackoverflow.com/questions/44476810/build-project-with-experimental-filesystem-using-cmake
 
 # linux下安装打开cmkae界面
 
@@ -212,6 +231,17 @@ RENAME：指定已安装文件的名称，该名称可能与原始文件不同�
 ​		
 
 # CMake 常用命令
+
+## 设置VS编译模式
+
+```
+//VS编译器禁止优化
+add_compile_options("/Od")
+//设置tyr...catch...捕获结构化异常
+add_compile_options("/EHa")
+```
+
+注：不能再最顶层cmakelist文件中设置编译器选项，需要具体到具体project才生效
 
 ## 添加FPIC选项
 
