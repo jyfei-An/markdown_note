@@ -1,6 +1,6 @@
 # 3dmax
 
-![image-20200516141328572](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200516141328572.png)
+![image-20200516141328572](https://i.loli.net/2020/10/21/s738i6nUjvH1am4.png)
 
 
 

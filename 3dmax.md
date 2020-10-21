@@ -4,12 +4,12 @@
 
 1 选择曲线编辑器快捷方式打开（或者选择图形编辑器->轨迹视图-摄影表）
 
-![image-20200501231925345](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200501231925345.png)
+![image-20200501231925345](https://i.loli.net/2020/10/21/v7cDNIPLwxCYkrG.png)
 
 2 选择操作对象，选择变换的位置旋转或者缩放，点击红色框的加号在白色虚线上点击添加关键帧，右键关键点，选择时间和状态
 
-![image-20200501232426552](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200501232426552.png)
+![image-20200501232426552](https://i.loli.net/2020/10/21/NHbBmZjtFlW3nMJ.png)
 
 3 选择下面的播放按钮，播放动画
 
-![image-20200501232635320](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200501232635320.png)
+![image-20200501232635320](https://i.loli.net/2020/10/21/l27amzEFH1nMLUw.png)
