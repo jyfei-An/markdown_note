@@ -1,8 +1,99 @@
-1 python注释
+# python 读写文件方法
+
+## 1 python读取txt文件，并转为数字
+
+文件内容如下：
+
+<img src="https://i.loli.net/2020/12/13/BulxUPLAQK4zcsh.png" alt="image-20201213150855657" style="zoom: 50%;" />
 
 
 
+代码如下：
 
+```python
+import sys
+
+txtresult=[]
+
+with open('testdata.txt','r') as f:
+  for line in f:
+    #去除文件每行的换行符后转为数字
+​    txtresult.append(float(line.strip('\n')))
+
+#打印文件内容
+print(txtresult)
+#打印列表长度
+print(len(txtresult))
+```
+
+
+
+# python list 使用方法
+
+## 1 获取列表最大值和最小值
+
+```python
+aa = [1,2,3,4,5]
+#获取列表最大值
+max(aa)
+#获取列表最小值
+min(aa)
+#获取列表最大值的索引
+aa.index(max(aa))
+#获取列表最小值的索引
+aa.index(min(aa))
+```
+
+## 2 获取list长度
+
+```python
+list1 = [1, 2, 3, 4, 5]
+print(len(list1))  #5
+```
+
+
+
+# python 基础
+
+## 1 条件判断
+
+```python
+age = 3
+if age >= 18:
+    print('your age is', age)
+    print('adult')
+else:
+    print('your age is', age)
+    print('teenager')
+    
+############################################
+
+age = 3
+if age >= 18:
+    print('adult')
+elif age >= 6:
+    print('teenager')
+else:
+    print('kid')
+```
+
+# VSCode 开发python
+
+## 1 安装插件
+
+Chinese 汉化插件
+
+Python 编写python插件
+
+alt+shift+F格式化代码插件（autope8） 
+
+2 开发Django项目
+
+https://code.visualstudio.com/docs/python/tutorial-django
+
+3 开发普通python项目
+
+https://code.visualstudio.com/docs/python/python-tutorial
 
 
 
@@ -17,14 +108,6 @@ update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 ```
 
 
-
-# if...else
-
-```
-var = False
-if not var:
-    print 'learnt stuff'
-```
 
 
 

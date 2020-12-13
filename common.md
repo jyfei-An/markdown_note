@@ -1,3 +1,17 @@
+
+
+小飞机翻墙（次元链接）：
+
+https://cylink.store/user##
+
+毒药机场测速：
+
+https://www.duyaoss.com/archives/3/
+
+
+
+
+
 ## Jupyter Notebook快捷键
 
 Alt-Enter : 运行本单元，在其下插入新单元
