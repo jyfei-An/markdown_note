@@ -1,3 +1,18 @@
+
+
+
+
+# Python main函数
+
+```python
+def func():    
+	print('hello, world!') 
+if __name__ == "__main__":    
+	func()
+```
+
+https://blog.csdn.net/weixin_35684521/article/details/81396434
+
 # python 读写文件方法
 
 ## 1 python读取txt文件，并转为数字
@@ -28,6 +43,56 @@ print(len(txtresult))
 
 
 
+
+
+# python 字符串 使用方法
+
+## 1 移除字符串头尾指定的字符
+
+```python
+str = "00000003210Runoob01230000000" 
+print str.strip( '0' )  # 去除首尾字符 0  
+str2 = "   Runoob      "   # 去除首尾空格 print str2.strip();
+```
+
+## 2 字符串切片
+
+split() 通过指定分隔符对字符串进行切片，如果第二个参数 num 有指定值，则分割为 num+1 个子字符串。
+
+### 语法
+
+split() 方法语法：
+
+```
+str.split(str="", num=string.count(str))
+```
+
+### 参数
+
+- str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。
+- num -- 分割次数。默认为 -1, 即分隔所有。
+
+### 返回值
+
+返回分割后的字符串列表。
+
+### 实例
+
+以下实例展示了 split() 函数的使用方法：
+
+```python
+str = "this is string example....wow!!!" 
+print (str.split( ))       # 以空格为分隔符 
+print (str.split('i',1))   # 以 i 为分隔符 
+print (str.split('w'))     # 以 w 为分隔符
+####################################输出结果##############################
+['this', 'is', 'string', 'example....wow!!!']
+['th', 's is string example....wow!!!']
+['this is string example....', 'o', '!!!']
+```
+
+
+
 # python list 使用方法
 
 ## 1 获取列表最大值和最小值
@@ -51,7 +116,13 @@ list1 = [1, 2, 3, 4, 5]
 print(len(list1))  #5
 ```
 
+## 3 列表循环获取下标
 
+```python
+#idx为下标，val为列表中的每一项值
+for idx, val in enumerate(ints):
+    print(idx, val)
+```
 
 # python 基础
 
