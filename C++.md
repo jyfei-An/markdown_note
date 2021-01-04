@@ -40,6 +40,166 @@ gcc dlopentest.c -ldl
 
 
 
+# 容器
+
+## 1 堆栈
+
+栈，容器，适用于后进先出的数据结构
+
+tack容器不支持随机访问，你能通过top()从栈顶获取元素，通过pop()从栈顶删除元素
+不支持迭代器，不能遍历，输出时只能top()一个，然后，pop()一个
+
+常用函数：
+
+构造函数：stack<元素类型[,底层容器类型]> 堆栈对象(构造实参表);
+　　　　　底层容器：vector/deque(默认)/list
+
+　　　　    stack<string, vector<string> > ss;
+
+　　　　　　stack<string, list<string> > ss;
+
+　　　　　　stack<string> ss;
+
+push(elem);//向栈顶添加元素，只能通过栈顶添加元素
+void pop();//从栈顶移除第一个元素,不返回栈顶元素
+top();//返回栈顶元素的引用，不删除元素,可通过赋值改变栈内元素，不能直接获取栈底元素
+empty();//判断堆栈是否为空
+size();//返回堆栈的大小
+
+push -> push_back
+pop -> pop_back
+top -> back
+size -> size
+empty -> empty
+clear -> clear
+
+ 
+
+![img](https://i.loli.net/2021/01/04/1XTDs6JYVq8gM2z.png)
+
+ 
+
+ 
+
+测试代码
+
+```
+void StackTest1()
+{
+    std::stack<std::string> ss;
+    ss.push("C++!");
+    ss.push("喜欢");
+    ss.push("我们");
+    //没有迭代器，只能通过循环遍历元素
+    //输出:我们喜欢C++
+    while (!ss.empty()) {
+        std::cout << ss.top() << std::flush;
+        ss.pop();
+    }
+    std::cout << std::endl;
+
+}
+
+void StackTest2()
+{
+    std::stack<std::string> ss;
+    ss.push("C++!");
+    ss.push("喜欢");
+    ss.push("我们");
+
+    //可通过赋值改变栈内元素的值
+    ss.top() = "测试";
+    //输出:测试喜欢C++
+    while (!ss.empty()) {
+        std::cout << ss.top() << std::flush;
+        ss.pop();
+    }
+    std::cout << std::endl;
+}
+```
+
+ 
+
+## 2 队列
+
+队列，容器，适用于先进先出的数据结构
+
+ queue 队列也是一个线性存储表，元素数据的插入在表的一端进行，在另一端删除，从而构成了一个先进先出FIFO（First In First Out）表。
+
+插入一端称为队尾，删除一端称为队首。 
+
+ 默认使用双端队列deque来实现，queue也可看成一个容器适配器，将 deque 容器转换为 queue 容器。当然，也可以利用其他合适的序列容器作为底层实现queue容器。
+
+ ![img](https://i.loli.net/2021/01/04/HdxikCzp3J5nbS6.png)
+
+ 
+
+ 
+
+ 
+
+ C++ STL对queue队列的泛化，是通过模板类型，将默认的deque双端队列类型导入，在内部创建一个序列容器对象，来处理 queue队列的数据存储和操作，包括queue队列是否为空、取队首元素、取队尾元素、元素入队和元素出队等。由于仅需要取队首和队尾元素的操作，因此queue队列容器并不提供任何类型的迭代器。
+
+ 
+
+常用函数：
+
+构造函数：queue<元素类型[,底层容器类型]> 队列对象(构造实参表);
+
+　　　　　底层容器：deque(默认)/list
+
+　　　　    queue<string, list<string> > qs;
+
+　　　　　　queue<string> qs;
+
+push(elem);//向队列尾部添加元素
+void pop();//删除队首元素
+
+front(); //获取队首元素的引用
+
+back();//获取队尾元素的引用
+
+*empty();//判断队列是否为空
+size();//返回队列的大小*
+
+push -> push_back
+pop -> pop_front
+back -> back
+front -> front
+size -> size
+empty -> empty
+clear -> clear
+
+测试代码
+
+```
+void QueueTest()
+{
+    //queue<string, list<string> > qs;
+    queue<string> qs;
+    qs.push("我们");
+    qs.push("喜欢");
+    qs.push("C++!");
+    //输出:我们喜欢C++
+    /*while (!qs.empty()) {
+        cout << qs.front() << std::endl;
+        qs.pop();
+    }*/
+    //获取队首元素
+    cout << qs.front() << endl;
+    //获取队尾元素
+    cout << qs.back() << endl;
+
+    //删除队首元素
+    qs.pop();
+    //获取队首元素
+    cout << qs.front() << endl;
+    cout << endl;
+}
+```
+
+ 
+
 # 计算函数调用时间
 
 ```cpp

@@ -10,6 +10,12 @@ https://www.duyaoss.com/archives/3/
 
 
 
+# youtube视频下载
+
+https://www.ganbey.com/youtube-download-3774
+
+
+
 
 
 ## Jupyter Notebook快捷键
