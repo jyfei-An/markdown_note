@@ -1,3 +1,5 @@
+# 函数查询手册：zeal
+
 
 
 # 常见问题
@@ -199,6 +201,140 @@ void QueueTest()
 ```
 
  
+
+# const 限定符
+
+## 1 const 对象必须初始化
+
+```c++
+//error,const 对象必须初始化
+//const int num1;
+```
+
+## 2 const修饰后值不能改变
+
+```C
+const int num = 100;
+//error,const 对象一旦创建就不能再改变
+//num = 1000;
+```
+
+默认情况下，const对象仅在该文件内使用
+
+如果想在多个文件之间共享const对象，必须在变量的定义之前添加extern关键字
+
+```c++
+//file_1.c定义并初始化了一个常量，该常量能被其他文件访问
+extern const int bufsize = 100;
+//file_2.h头文件
+extern const int bufsize;//与file_1.c中定义的bufsize是同一个
+```
+
+## 3 const的引用
+
+```c++
+const int ci = 1024;
+//正确，引用及其对应的对象都是常量
+const int &ri = ci;
+
+//错误，ri是对常量的引用，不能修改其值
+//ri = 42;
+
+//错误，试图让一个非常量引用指向一个常量对象
+//int &ri2 = ci;
+
+int i = 42;
+//允许一个常量引用指向一个非常量对象
+const int &ri3 = i;
+```
+
+
+
+## 4 指向常量的指针
+
+指针指向的内存值不能改变，但可以使指针指向其他内存块
+
+```c++
+const double pi = 3.14;
+//错误，pi是个常量，值不能被改变
+//double *ptr = &pi;
+
+//正确，指向常量的指针不能用于改变其所指对象的值
+const double *cptr = &pi;
+//错误，不能给*cptr赋值
+//*cptr = 42;
+```
+
+## 5 常量指针
+
+指针指向不能改变，但指向的内存块值可以改变
+
+	int errnum = 0;
+	//正确，curerr是一个常量指针，curerr将一直指向errnum，不能改变指针的值
+	int *const curerr = &errnum;
+	int num = 100;
+	//错误，不能改变指针的指向
+	//curerr = &num;
+	
+	const double pi = 3.14;
+	//错误，常量指针指向常量对象
+	//double *const pip = &pi;
+	//pip是一个指向常量对象的常量指针
+	const double *const pip = &pi;
+
+# constexpr 限定符
+
+常量表达式是指值不会改变并且在编译过程就能得到计算结果的表达式
+
+## 1 声明数组维数
+
+```c++
+constexpr int size = 100;
+int arr[size] = { 0 };
+```
+
+```c++
+/*
+ 错误，函数调用在常量表达式中必须具有常量值
+const int func() {
+	return 10;
+}
+
+int main()
+{
+	int arr[func()];
+
+}
+*/
+```
+
+```c++
+//正确，在编译期就确定了func计算出的值10而无需等到运行时再去计算。
+constexpr int func() {
+	return 10;
+}
+
+int main()
+{
+	int arr[func()];
+
+}
+```
+
+
+
+## 2 constexpr函数
+
+- 任何声明，除了：
+  - `static`或`thread_local`变量。
+  - 没有初始化的变量声明。
+- 条件分支语句`if`和`switch`。
+- 所有的循环语句，包括基于范围的`for`循环。
+- 表达式可以改变一个对象的值，只需该对象的生命期在声明为constexpr的函数内部开始。包括对有`constexpr`声明的任何非`const`非静态成员函数的调用。
+
+`goto`仍然不允许在constexpr函数中出现。
+
+
 
 # 计算函数调用时间
 
