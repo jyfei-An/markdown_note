@@ -10,28 +10,6 @@ conda --version
 
 
 
-# Numpy
-
-## 1 列表和数组区别
-
-列表：数据类型可以不同
-
-数组：数据类型相同
-
-## 2 Numpy简介
-
-NumPy是一个开源的 Python科学计算基础库。
-
-1. 一个强大的N维数组对象 ndarray
-2.  广播功能函数
-3.  整合C/C++/ Fortran代码的工具线性代数、傅里叶变换、随机数生成等功能
-
-NumPy是 SciPy、 Pandas等数据处理或科学计算库的基础。
-
-## 3 Numpy的引用
-
-
-
 # Ipython
 
 ## 1 变量+？显示变量信息
