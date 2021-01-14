@@ -337,7 +337,9 @@ plt.show()
 
 
 
-# 设置坐标轴范围（axis）
+# 设置坐标轴范围
+
+## 1 axis函数
 
 ```python
 #导入包
@@ -368,6 +370,109 @@ plt.annotate('test annotate', xy=(3,1),
 plt.axis([-10,10,0,15])
 
 plt.show()
+```
+
+## 2 xlim函数
+
+```
+plt.xlim((-1,2))#设置x轴范围
+plt.ylim((-2,3))#设置轴y范围
+```
+
+```
+#导入包
+import  matplotlib.pyplot as plt
+import numpy as np
+#创建连续数组（0-0）
+a = np.arange(10)
+#绘制多条曲线，每条曲线必须有x,y
+#绿色+虚线+实心圆标记
+plt.plot(a,a*2, color='g', linestyle= ':',marker='o')
+
+##设置坐标轴含义， 注：英文直接写，中文需要后面加上fontproperties属性
+#设置横坐标轴名称
+plt.xlabel(u'横坐标轴',fontproperties='SimHei',fontsize=50)
+#设置纵坐标轴名称
+plt.ylabel(u'纵坐标轴',fontproperties='SimHei',fontsize=20)
+plt.title('标题',fontproperties='SimHei',fontsize=50)
+#在坐标（2，1）位置绘制文本内容
+plt.text(2,1,'test text',fontsize=15)
+
+#xy箭头位置坐标，xytext文本位置坐标，
+plt.annotate('test annotate', xy=(3,1),
+                xytext=(5,6),
+                arrowprops=dict(facecolor='black', headwidth=4, 
+                                width=2, headlength=4,shrink=0.1))
+
+#参数为一个数组，依次为x的左边界，x的右边界，y的下边界，y的上边界
+#plt.axis([-10,10,0,15])
+
+plt.xlim((-1,10))#设置x轴范围
+plt.ylim((-2,10))#设置轴y范围
+
+#设置坐标轴网格显示
+plt.grid(True)
+
+plt.show()
+```
+
+
+
+# 设置坐标轴显示刻度
+
+## xticks  yticks 函数
+
+```python
+#导入包
+import  matplotlib.pyplot as plt
+import numpy as np
+#创建连续数组（0-0）
+a = np.arange(10)
+#绘制多条曲线，每条曲线必须有x,y
+#绿色+虚线+实心圆标记
+plt.plot(a,a*2, color='g', linestyle= ':',marker='o')
+
+##设置坐标轴含义， 注：英文直接写，中文需要后面加上fontproperties属性
+#设置横坐标轴名称
+plt.xlabel(u'横坐标轴',fontproperties='SimHei',fontsize=50)
+#设置纵坐标轴名称
+plt.ylabel(u'纵坐标轴',fontproperties='SimHei',fontsize=20)
+plt.title('标题',fontproperties='SimHei',fontsize=50)
+#在坐标（2，1）位置绘制文本内容
+plt.text(2,1,'test text',fontsize=15)
+
+#xy箭头位置坐标，xytext文本位置坐标，
+plt.annotate('test annotate', xy=(3,1),
+                xytext=(5,6),
+                arrowprops=dict(facecolor='black', headwidth=4, 
+                                width=2, headlength=4,shrink=0.1))
+
+#参数为一个数组，依次为x的左边界，x的右边界，y的下边界，y的上边界
+#plt.axis([-10,10,0,15])
+
+plt.xlim((-1,10))#设置x轴范围
+plt.ylim((-2,10))#设置轴y范围
+
+# 设置x轴刻度
+
+# -1到2区间，5个点，4个区间，平均分：[-1.,-0.25,0.5,1.25,2.]
+
+new_ticks=np.linspace(-1,20,5)
+print(new_ticks)
+
+
+#设置x轴，Y轴刻度,刻度可现实字符串
+plt.xticks(new_ticks)
+#plt.yticks([-2,-1.8,-1,1.22,3.], ['非常糟糕','糟糕',r'$good\ \alpha$',r'$really\ good$','超级好'],fontproperties='SimHei')
+plt.yticks([-2,-1.8,-1,1.22,20.])
+
+
+#设置坐标轴网格显示
+plt.grid(True)
+
+plt.show()
+
+
 ```
 
 
@@ -404,6 +509,64 @@ plt.axis([-10,10,0,15])
 
 #设置坐标轴网格显示
 plt.grid(True)
+
+plt.show()
+```
+
+
+
+# 设置图例
+
+## plot函数label设置图例
+
+```python
+#导入包
+import  matplotlib.pyplot as plt
+import numpy as np
+
+
+fig = plt.figure();
+ax = fig.add_subplot(1, 1, 1)
+#创建连续数组（0-0）
+a = np.arange(10)
+
+#绘制多条曲线，每条曲线必须有x,y，label代表图例属性
+plt.plot(a,a*2,'go-',label='three')
+plt.plot(a,a*4,'rx',label='One')
+
+#自动创建图例,loc告诉matplotlib把图例放在哪里。如果不挑剔的话，直接设定'best'就可以了，
+#它会自动选择一个合适的位置。如果想要从图例中排除一个或更多的元素，那就不要传入label，或设置label='_nolegen_'。
+#在show之前设置，否则不生效
+ax.legend(loc='best')
+
+plt.show()
+```
+
+## Legend设置图例
+
+```python
+#导入包
+import  matplotlib.pyplot as plt
+import numpy as np
+
+
+fig = plt.figure();
+ax = fig.add_subplot(1, 1, 1)
+#创建连续数组（0-0）
+a = np.arange(10)
+
+#返回值必须加逗号，加逗号得到的是 line2D 对象，不加逗号得到的是只有一个 line2D 对象的列表
+p1, = plt.plot(a,a*2,'go-')
+p2, =plt.plot(a,a*4,'rx')
+
+'''
+prop={'family':'SimHei','size':15}显示中文
+legend(hadles=[,,],labels=[,,],loc='best/upper right/upper left/.../lower right')
+handles就是你给他添加legend的线,如果要用handles，则前面的plt.plot，必须用l1,形式(不要忘记逗号)
+此处labels会覆盖上述的plt.plot()的label
+loc默认是best,给你放在一个合适的位置上，如果你拉伸弹框，位置会跟着变，自动放置合适位置
+'''
+plt.legend(handles=[p1,p2],prop={'family':'SimHei','size':15},loc='lower right',labels=['直线','曲线'])
 
 plt.show()
 ```
