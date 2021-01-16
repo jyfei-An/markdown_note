@@ -7,77 +7,232 @@ Numpy是一个用python实现的科学计算的扩展程序库，包括：
 
 NumPy（Numeric Python）提供了许多高级的数值编程工具，如：矩阵数据类型、矢量处理，以及精密的运算库。专为进行严格的数字处理而产生。多为很多大型金融公司使用，以及核心的科学计算组织如：Lawrence Livermore，NASA用其处理一些本来使用C++，Fortran或Matlab等所做的任务。
 
-#CSV文件读取
+# CSV文件读取
+
+## 一维CSV文件读取
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155229728-1347880001.png)
 
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154650447-536657294.png)
+![(https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154650447-536657294.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154653905-243523839.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154657580-794872802.png)
 
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154700976-1918848712.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154704501-889961455.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154708033-513848600.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154711674-556423872.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154716439-2082852728.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154720709-321437027.png)
+
+### 保存文件savetxt
+
+```python
+import numpy as np
+
+a = np.arange(100).reshape(5,20)
+np.savetxt('a.csv',a,fmt='%d',delimiter=',')
+```
+
+### 读取文件loadtxt
+
+```
+b=np.loadtxt('a.csv',delimiter=',')
+b.shape
+```
+
+
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154724375-135027373.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154727758-1641951143.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154731275-763014628.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154735469-1408733135.png)
+
+
+
+
+
+## 多维CSV文件读取
+
+### 保存文件tofile
+
+```
+import numpy as np
+
+a = np.arange(100).reshape(5,20)
+#存储的文件中不包含任何维度信息
+a.tofile('D:/b.dat',sep=',',format='%d')
+```
+
+```
+import numpy as np
+
+a = np.arange(100).reshape(5,20)
+#不指定分隔符后，存储的文件为二进制文件，二进制文件会比文本文件占用更小的空间
+a.tofile('D:/b.dat',sep='',format='%d')
+```
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154740713-16800467.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154744207-1623892604.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154747650-183355695.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154752504-1670990587.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154756472-630706310.png)
+
+
+
+### 读取文件fromfile
+
+```
+c=np.fromfile('D:/b.dat',dtype=int).reshape(5,20)
+```
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154800143-329679379.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154803901-20951802.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154808090-1528049894.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154824300-572926356.png)
+
+![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154829900-1423764316.png)
+
+### 便捷文件存取save/load
+
+存储文件
+
+```python
+import numpy as np
+
+a = np.arange(100).reshape(5,20)
+np.save('a.npy',a)
+```
+
+
+
+加载文件
+
+```python
+import numpy as np
+
+a = np.arange(100).reshape(5,20)
+np.save('a.npy',a)
+
+b= np.load('a.npy')
+#(5,20)
+print(b.shape)
+```
+
+
+
+![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154840787-2000451776.png)
+
+![img](https://i.loli.net/2021/01/16/adfLpG8X7kJtQ1D.png)
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154829900-1423764316.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154834749-394575513.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154840787-2000451776.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154845426-1504447695.png)
 
+
+
+## 注意
+
+```
+若是作为中间数据缓存，save和load是一种十分便捷的方法
+若是与其他程序进行交互对接，CSV是一种不错的方法
+```
+
+## 参考资料
+
+https://www.cnblogs.com/ssyfj/p/9291265.html#%E4%B8%80%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84csv%E6%96%87%E4%BB%B6%E5%AD%98%E5%8F%96%E4%B8%80%E7%BB%B4%E6%88%96%E4%BA%8C%E7%BB%B4
+
 # numpy随机数函数
+
+![img](https://i.loli.net/2021/01/16/ov1GSZPzEXQwjBD.png)
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154909887-1028229803.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154918262-6992780.png)
 
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154924220-1561672135.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154938245-1339005973.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154941752-1289443659.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154945844-1197204317.png)
+## 均与分布（0，1）
+
+![img](https://i.loli.net/2021/01/16/jv2lDMfhGLzVJZk.png)
+
+
+
+
+
+## 标准正太分布
+
+![img](https://i.loli.net/2021/01/16/s7SwVgBi4ejvyq9.png)
+
+## 随机整数
+
+![img](https://i.loli.net/2021/01/16/c3pwE4vUMu9aKnD.png)
+
+![img](https://i.loli.net/2021/01/16/5S83qXDveM7grWP.png)
+
+## 乱序数组
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154949462-1021028478.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154954112-439619322.png)
+![img](https://i.loli.net/2021/01/16/9z2LkmbtRYZrI7O.png)
 
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112154958156-1041720102.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155002350-546311602.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155007526-2045323755.png)
+![img](https://i.loli.net/2021/01/16/qODys15CrQKhEJH.png)
+
+
+
+![img](https://images2018.cnblogs.com/blog/1309518/201807/1309518-20180710192657652-1772400634.png)
+
+注意：上面的概率是谁的数值越大，谁被抽取的概率越大
+
+
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155011748-1884537475.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155317151-779820873.png)
 
+## 均匀分布数组（设置上下限）
+
+![img](https://i.loli.net/2021/01/16/2JdhcWCOSbZm8pf.png)
+
+## 正太分布数组（设置均值标准差）
+
+![img](https://i.loli.net/2021/01/16/HfGX7P8bTZwMIYD.png)
+
+
+
+## 参考资料
+
+https://www.cnblogs.com/ssyfj/p/9291265.html#%E4%B8%80%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84csv%E6%96%87%E4%BB%B6%E5%AD%98%E5%8F%96%E4%B8%80%E7%BB%B4%E6%88%96%E4%BA%8C%E7%BB%B4
 
 # numpy中random的统计函数
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155253572-778561272.png)
 
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155248450-85772522.png)
 
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155243086-38666497.png)
 
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155105004-1231823631.png)
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155110100-505827727.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155115778-1426066412.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155119300-928319270.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155123452-1062393936.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155128294-1088775856.png)
+
+## 数组求和
+
+![img](https://i.loli.net/2021/01/16/x9yY2UQeLsHmnib.png)
+
+## 加权平均
+
+![img](https://i.loli.net/2021/01/16/8o5lPVFDrQL9Yqk.png)
+
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155131969-2025717557.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155137911-429940817.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155145845-2045160394.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155207823-377859190.png)
+
+## 获取数组元素最大值
+
+![img](https://i.loli.net/2021/01/16/2yDbWEiJ6nXwGtZ.png)
+
+## 获取元素最大值下标
+
+![](https://i.loli.net/2021/01/16/IsP4hprYQOHWdEM.png)
+
+## 梯度函数
+
+```
+梯度：反应了元素的变化率，梯度有助于我们发现图像。声音的边缘，在那些不是很平滑的地方，我们能够很快的发现
+```
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155213403-1722184397.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155217315-1929589749.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155221564-491791023.png)
+
+![img](https://i.loli.net/2021/01/16/13dQfWObgXGxym4.png)
+
+![img](https://images2018.cnblogs.com/blog/1309518/201807/1309518-20180710201423991-42965212.png)
+
+## 参考资料
+
+https://www.cnblogs.com/ssyfj/p/9291265.html#%E4%B8%80%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%9A%84csv%E6%96%87%E4%BB%B6%E5%AD%98%E5%8F%96%E4%B8%80%E7%BB%B4%E6%88%96%E4%BA%8C%E7%BB%B4
+
+
 
 # 1.Numpy基本操作
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155604518-1979432601.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155640588-302628499.png)
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112155644572-750836774.png)
@@ -677,73 +832,86 @@ clip(Array,Array_min,Array_max)
 # 4.Numpy索引与切片
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112153138019-1378933608.png)
 
+## 一维数组的索引
 
-## 一维数组的索引切片
+```python
+x1 = np.arange(10)
+#[0 1 2 3 4 5 6 7 8 9]
+print(x1)
+#0
+print(x1[0])
+#5
+print(x1[5])
+#9
+print(x1[-1])
+```
+
+
+
+## 多维数组的索引
+
+每个维度一个索引值，逗号分隔
+
+```python
+x2 = np.arange(20).reshape(2,10)
+#[[ 0  1  2  3  4  5  6  7  8  9] [10 11 12 13 14 15 16 17 18 19]]
+print(x2)
+#11
+print(x2[1, 1])
+#11
+print(x2[1][1])
+```
+
+![](https://i.loli.net/2021/01/16/dqHrZtjEPUIkh7s.png)
+
+## 一维数组的切片
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112153113041-639532905.png)
 
+```python
+x1 = np.arange(10)
+#[0 1 2 3 4 5 6 7 8 9]
+print(x1)
+#起始编号默认为0，步长默认为1
+#[0 1 2]
+print(x1[:3])
+#终止编号默认为最后一个，步长默认为1
+#[3 4 5 6 7 8 9]
+print(x1[3:])
+#步长为-1，倒序输出
+#[9 8 7 6 5 4 3 2 1 0]
+print(x1[::-1])
+```
 
-## 多维数组的索引切片
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112153144556-1879292875.png)
-![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112153150882-331769317.png)
+
+
+## 多维数组的切片
+
+
+
 ![](https://img2020.cnblogs.com/blog/1317399/202101/1317399-20210112153159196-936523627.png)
 
+```python
+x2 = np.arange(20).reshape(2,10)
+#[[ 0  1  2  3  4  5  6  7  8  9] [10 11 12 13 14 15 16 17 18 19]]
+print(x2)
+#第一个维度选取第一行和第二行，第二个维度选取0，1，2列
+#[[ 0  1  2] [10 11 12]]
+print(x2[:2, :3])
+#第一个维度选取第一行和第二行，第二个维度选取0，2列
+#[[ 0  2] [10 12]]
+print(x2[:2, 0:3:2]) 
+#选取全部，行列倒序输出
+print(x2[::-1, ::-1])
 
-In [48]:
+#获取第一行元素[10 11 12 13 14 15 16 17 18 19]
+print(x2[1, :])
 
-```
-import numpy as np
-A = np.arange(3,15)
-print(A)
-[ 3  4  5  6  7  8  9 10 11 12 13 14]
-```
-
-In [49]:
-
-```
-print(A[3])
-6
-```
-
-In [50]:
-
-```
-B = A.reshape(3,4)
-print(B)
-[[ 3  4  5  6]
- [ 7  8  9 10]
- [11 12 13 14]]
+#获取第二列元素[ 2 12]
+print(x2[:,2])
 ```
 
-In [51]:
-
-```
-print(B[2])
-[11 12 13 14]
-```
-
-In [52]:
-
-```
-print(B[0][2])
-5
-```
-
-In [53]:
-
-```
-print(B[0,2])
-5
-```
-
-In [54]:
-
-```
-# list切片操作
-print(B[1,1:3]) # [8 9] 1:3表示1-2不包含3
-[8 9]
-```
-
-In [55]:
+## 打印每一行元素
 
 ```
 for row in B:
@@ -753,7 +921,7 @@ for row in B:
 [11 12 13 14]
 ```
 
-In [56]:
+## 打印每一列元素
 
 ```
 # 如果要打印列，则进行转置即可
@@ -765,18 +933,7 @@ for column in B.T:
 [ 6 10 14]
 ```
 
-In [57]:
-
-```
-# 多维转一维
-A = np.arange(3,15).reshape((3,4))
-# print(A)
-print(A.flatten())
-# flat是一个迭代器，本身是一个object属性
-[ 3  4  5  6  7  8  9 10 11 12 13 14]
-```
-
-In [58]:
+## 打印每一个元素
 
 ```
 for item in A.flat:
@@ -795,7 +952,18 @@ for item in A.flat:
 14
 ```
 
-我们一起来来总结一下，看下面切片取值方式（对应颜色是取出来的结果）：
+
+
+## 多维转一维
+
+```
+# 多维转一维
+A = np.arange(3,15).reshape((3,4))
+# print(A)
+print(A.flatten())
+# flat是一个迭代器，本身是一个object属性
+[ 3  4  5  6  7  8  9 10 11 12 13 14]
+```
 
 
 

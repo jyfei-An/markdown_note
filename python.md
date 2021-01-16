@@ -1,3 +1,15 @@
+# 统计函数运行时间
+
+```python
+import numpy as np
+
+values = np.arange(1, 1000000)
+%timeit 1/values
+#out:1.72 ms ± 24.7 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+```
+
+
+
 # Anaconda
 
 ![image-20210111223555957](https://i.loli.net/2021/01/11/Ti98hkxg4cMF7XS.png)

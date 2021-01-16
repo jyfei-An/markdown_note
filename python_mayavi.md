@@ -37,6 +37,8 @@ from mayavi import mlab
 
 ## mlab.mesh的使用，快速创建绘图
 
+参考：https://stackoverflow.com/questions/37849063/how-are-x-y-z-coordinates-defined-for-mayavis-mlab-mesh
+
 ```
 from mayavi import mlab
 
