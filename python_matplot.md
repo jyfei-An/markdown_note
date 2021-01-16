@@ -39,9 +39,9 @@ markersize：标记尺寸， markersize=20
 
 
 
-# 3 绘制曲线
+# 3 绘制折线图
 
-## 绘制一条曲线
+## 绘制一条折线
 
 ```python
 #导入包
@@ -54,7 +54,7 @@ plt.plot(a)
 plt.show()
 ```
 
-## 绘制多条曲线
+## 绘制多条折线
 
 ```python
 #导入包
@@ -66,6 +66,40 @@ a = np.arange(10)
 plt.plot(a,a*2,a,a*4,a,a*6)
 plt.show()
 ```
+
+
+
+# 绘制散点图
+
+## 通过plot函数
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+ax = plt.subplot()
+#曲线格式为实心圆标记+无线条
+ax.plot(10*np.random.randn(100),10*np.random.randn(100),'o-')
+ax.set_title("Simple Scatter")
+
+plt.show()
+```
+
+## 通过scatter函数
+
+```python
+#导入包
+import  matplotlib.pyplot as plt
+import numpy as np
+#创建连续数组（0-0）
+a = np.arange(10)
+b = np.arange(10)
+#s参数表示绘制图形时使用的点的尺寸
+plt.scatter(a,b,s=500)
+plt.show()
+```
+
+
 
 # 改变线条颜色
 
@@ -571,3 +605,146 @@ plt.legend(handles=[p1,p2],prop={'family':'SimHei','size':15},loc='lower right',
 plt.show()
 ```
 
+# 保存图片(savefig)
+
+```python
+import matplotlib.pyplot as plt
+
+plt.plot([3,1,4,5,2])
+plt.ylabel("grade")
+#默认为png文件，dpi修改输出质量
+plt.savefig("qqq",dip=600)
+plt.show()
+```
+
+# 区域划分subplot
+
+## 简单绘图区域(subplot)
+
+![img](https://i.loli.net/2021/01/16/6dEAFxgZOJyYcj7.png)
+
+**注意：划分区域可以不使用','**
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+def f(t):
+    #衰减曲线
+    return np.exp(-t)*np.cos(2*np.pi*t)
+
+a = np.arange(0.0,5.0,0.02)
+
+#划分为两行一列，选取第一个区域
+plt.subplot(211)
+#绘制衰减曲线
+plt.plot(a,f(a))
+
+#在将绘图区域换到整个绘图区域的第二个,自动切换
+#如果注释掉下面代码，两条曲线会绘制到一张图上
+plt.subplot(2,1,2)
+#绘制余弦曲线
+plt.plot(a,np.cos(2*np.pi*a),'r--')
+
+plt.show()
+```
+
+## 复杂绘图区域(subplot2grid)
+
+![img](https://i.loli.net/2021/01/16/YPawHLGn3ptIjhC.png)
+
+![img](https://i.loli.net/2021/01/16/gx8CblmJvc9VaX4.png)
+
+![img](https://i.loli.net/2021/01/16/tumG7Xza3KCUpyN.png)
+
+![img](https://i.loli.net/2021/01/16/ePRn2AJBoxGgD83.png)
+
+# 基本绘图函数
+
+![img](https://images2018.cnblogs.com/blog/1309518/201807/1309518-20180711112843173-1716331814.png)
+
+
+
+![img](https://i.loli.net/2021/01/16/4VwzEsygR3SUqAp.png)
+
+![img](https://images2018.cnblogs.com/blog/1309518/201807/1309518-20180711112941509-1035106964.png)
+
+
+
+## 饼图plt.pie的绘制
+
+```python
+import matplotlib
+import matplotlib.pyplot as plt
+
+labels = 'Frogs','Hogs','Dogs','Logs'
+#这是各个区域所占的大小，不一定是100，会自动换算为百分比
+sizes = [15,30,45,10]
+#0.1是表示这个区域突出的程度
+explode = (0,0.1,0,0)
+
+#explode是突出比例，startangle起始角度
+plt.pie(sizes,explode=explode,labels=labels,autopct="%1.1f%%",shadow=False,startangle=90)
+#将饼图变水平
+plt.axis("equal")
+plt.show()
+```
+
+![image-20210116131006811](https://i.loli.net/2021/01/16/iPdS1bMLal4rtuY.png)
+
+
+
+## 直方图plt.hist的绘制
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(0)
+#均值和标准差
+mu,sigma = 100,20 
+#正态分布，size=100，表示一维数组，长度100
+a = np.random.normal(mu,sigma,size=100)
+plt.hist(a,20,histtype="stepfilled",facecolor="b",alpha=0.75)
+
+plt.title("Histogram")
+
+plt.show()
+```
+
+```
+def hist(x, bins=10, range=None, normed=False, weights=None, cumulative=False,
+         bottom=None, histtype='bar', align='mid', orientation='vertical',
+         rwidth=None, log=False, color=None, label=None, stacked=False,
+         hold=None, data=None, **kwargs):
+```
+
+修改第二个参数bins:代表直方图的个数，均分为多段，取其中的每段均值
+
+```
+plt.hist(a,10,normed=1,histtype="stepfilled",facecolor="b",alpha=0.75)
+```
+
+```
+plt.hist(a,20,normed=1,histtype="stepfilled",facecolor="b",alpha=0.75)
+```
+
+```
+plt.hist(a,40,normed=1,histtype="stepfilled",facecolor="b",alpha=0.75)
+```
+
+ normed为1代表我们要使用归一化数据（所占比例）在y轴，为0表示每个期间所占个数
+
+```
+plt.hist(a,20,normed=1,histtype="stepfilled",facecolor="b",alpha=0.75)
+```
+
+```
+plt.hist(a,20,normed=0,histtype="stepfilled",facecolor="b",alpha=0.75)
+```
+
+
+
+# 参考资料
+
+https://www.cnblogs.com/ssyfj/p/9293844.html
