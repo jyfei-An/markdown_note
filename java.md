@@ -1,3 +1,35 @@
+https://blog.csdn.net/qq_45554909/article/details/111611282
+
+https://blog.csdn.net/qq_45554909/article/details/111658223
+
+
+
+[IDEA 整合 Tomcat 服务器_少年西西的博客-CSDN博客](https://blog.csdn.net/qq_45554909/article/details/111712970)
+
+
+
+# Maven
+
+https://www.jetbrains.com/help/idea/maven-support.html#javaee_maven
+
+# Tomcat 
+
+## startup.bat后控制台乱码
+
+解决：
+
+1. 打开tomcat文件夹到conf目录下找到logging.properties文件；
+
+![img](https://i.loli.net/2021/01/19/I9AcdRgSmOfWzGt.jpg)
+
+2. 找到 java.util.logging.ConsoleHandler.encoding = utf-8 这行；
+
+![img](https://i.loli.net/2021/01/19/7u5pa8k1Y6zTNnR.jpg)
+
+3. 更改为 java.util.logging.ConsoleHandler.encoding = **GBK**，就可以了！
+
+
+
 # Idea第一个HelloWorld程序
 
 ## 1 新建project
@@ -55,6 +87,14 @@ public class HelloWorld {
 在源文件空白处右键，选择Run‘HelloWorld.main()’运行程序
 
 ![image-20210114211727047](https://i.loli.net/2021/01/14/QmokPpAU2zyciIh.png)
+
+# Idea2020创建第一个应用程序并打包
+
+https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html
+
+
+
+
 
 # 环境变量设置
 

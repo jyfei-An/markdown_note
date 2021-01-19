@@ -956,13 +956,45 @@ for item in A.flat:
 
 ## 多维转一维
 
-```
-# 多维转一维
+### ravel函数
+
+```python
 A = np.arange(3,15).reshape((3,4))
-# print(A)
-print(A.flatten())
-# flat是一个迭代器，本身是一个object属性
-[ 3  4  5  6  7  8  9 10 11 12 13 14]
+print(A)
+#ravel不会产生源数据的副本，对B的修改同时影响原数组
+B=A.ravel()
+print(B)
+B[0]=100
+print(B)
+print(A)
+```
+
+
+
+### flatten函数
+
+```python
+A = np.arange(3,15).reshape((3,4))
+print(A)
+#flatten返回源数据的副本,对副本的修改不会影响原数组
+B=A.flatten()
+print(B)
+B[0]=100
+print(B)
+print(A)
+```
+
+### reshape(-1)函数
+
+```python
+A = np.arange(3,15).reshape((3,4))
+print(A)
+#reshape不会产生源数据的副本，对B的修改同时影响原数组
+B=A.reshape(-1)
+print(B)
+B[0]=100
+print(B)
+print(A)
 ```
 
 
@@ -971,51 +1003,74 @@ print(A.flatten())
 
 ## 5.1 数组合并
 
-In [59]:
+### 上下合并vstack
 
-```
+```python
 import numpy as np
-A = np.array([1,1,1])
+A = np.array([[1,1,1],[2,3,4]])
 B = np.array([2,2,2])
+#要求两个数组有相同的列
 print(np.vstack((A,B)))
 # vertical stack 上下合并,对括号的两个整体操作。
 [[1 1 1]
  [2 2 2]]
 ```
 
-In [60]:
+### 水平合并hstack
 
-```
-C = np.vstack((A,B))
-print(C)
-[[1 1 1]
- [2 2 2]]
-```
-
-In [61]:
-
-```
-print(A.shape,B.shape,C.shape)# 从shape中看出A,B均为拥有3项的数组(数列)
-(3,) (3,) (2, 3)
+```python
+import numpy as np
+A = np.array([[1,1,1],[2,3,4]])
+B = np.array([[2,2,2],[3,3,3]])
+#要求两个数字有相同的行
+print(np.hstack((A,B)))
 ```
 
-In [62]:
+### 上下合并r_
 
-```
-# horizontal stack左右合并
-D = np.hstack((A,B))
-print(D)
-[1 1 1 2 2 2]
+```python
+import numpy as np
+A = np.array([[1,1,1],[2,3,4]])
+B = np.array([2,2,2]).reshape(1,3)
+#要求两个数组有相同的列
+print(np.r_[A,B])
 ```
 
-In [63]:
+### 水平合并c_
 
+```python
+import numpy as np
+A = np.array([[1,1,1],[2,3,4]])
+B = np.array([[2,2],[3,3]])
+#要求两个数字有相同的行
+print(np.c_[A,B])
 ```
-print(A.shape,B.shape,D.shape)
-# (3,) (3,) (6,)
-# 对于A,B这种，为数组或数列，无法进行转置，需要借助其他函数进行转置
-(3,) (3,) (6,)
+
+
+
+### 维度降维squeeze
+
+```python
+import numpy as np
+
+a  = np.arange(10).reshape(1,10)
+#(1, 10)
+print(a.shape)
+#将shape中为1的维度去掉
+b = np.squeeze(a)
+#(1, 10)
+print(b.shape)
+
+a  = np.arange(10).reshape(5,2,1)
+#(1, 10)
+print(a.shape)
+#将shape中为1的维度去掉
+b = np.squeeze(a)
+#(1, 10)
+print(b.shape)
 ```
+
+
 
 ## 5.2 数组转置为矩阵
 
@@ -1719,3 +1774,88 @@ Out[118]:
 array([[1, 0],
        [2, 0],
        [0, 1]])  
+
+
+
+
+
+# 网格点坐标矩阵meshgrid
+
+## 二维坐标矩阵
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.array([[0, 1, 2], [0, 1, 2]])
+y = np.array([[0, 0, 0], [1, 1, 1]])
+
+#给matplotlib的坐标信息是矩阵也是可以的，只要横纵坐标的尺寸一样。都会按照对应关系生成点。
+plt.plot(x, y,
+         color='red',  # 全部点设置为红色
+         marker='.',  # 点的形状为圆点
+         linestyle='')  # 线型为空，也即点与点之间不用线连接
+plt.grid(True)
+plt.show()
+```
+
+![这里写图片描述](https://i.loli.net/2021/01/17/OLyGlzE9d6kaFRS.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0,1000,20)
+y = np.linspace(0,500,18)
+
+#X矩阵的每一行都相同，共有18行
+#Y矩阵的每一列都相同，共有20列
+X,Y = np.meshgrid(x, y)
+"""
+>>> X, Y = np.meshgrid([1,2,3], [4,5,6,7])
+>>> X
+array([[1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3],
+       [1, 2, 3]])
+>>> Y
+array([[4, 4, 4],
+       [5, 5, 5],
+       [6, 6, 6],
+       [7, 7, 7]])
+"""
+
+#(18, 20)
+print(X.shape)
+#(18, 20)
+print(Y.shape)
+
+plt.plot(X, Y,
+         color='limegreen',  # 设置颜色为limegreen
+         marker='.',  # 设置点类型为圆点
+         linestyle='')  # 设置线型为空，也即没有线连接点
+plt.grid(True)
+plt.show()
+```
+
+![image-20210117215630031](https://i.loli.net/2021/01/17/n8qCAKxX1YWJT3F.png)
+
+参考资料：https://blog.csdn.net/lllxxq141592654/article/details/81532855
+
+## 三维坐标矩阵
+
+```python
+import numpy as np
+
+x_ = np.linspace(0., 1., 10)
+y_ = np.linspace(1., 2., 20)
+z_ = np.linspace(3., 4., 30)
+
+x, y, z = np.meshgrid(x_, y_, z_, indexing='ij')
+
+assert np.all(x[:,0,0] == x_)
+assert np.all(y[0,:,0] == y_)
+assert np.all(z[0,0,:] == z_)
+#(10, 20, 30)
+print(x.shape)
+```

@@ -10,18 +10,6 @@ values = np.arange(1, 1000000)
 
 
 
-# Anaconda
-
-![image-20210111223555957](https://i.loli.net/2021/01/11/Ti98hkxg4cMF7XS.png)
-
-## 查看conda版本
-
-```
-conda --version
-```
-
-
-
 # Ipython
 
 ## 1 变量+？显示变量信息
@@ -184,39 +172,13 @@ else:
     print('kid')
 ```
 
-# VSCode 开发python
 
-## 1 安装插件
-
-Chinese 汉化插件
-
-Python 编写python插件
-
-alt+shift+F格式化代码插件（autope8） 
-
-2 开发Django项目
-
-https://code.visualstudio.com/docs/python/tutorial-django
-
-3 开发普通python项目
-
-https://code.visualstudio.com/docs/python/python-tutorial
-
-
-
-# VS设置python编译环境
-
-在VS中添加python组件，注意默认为再次安装anacoda和python，如电脑上已经安装，可以取消组件
 
 # Ubuntu下设置python默认版本为python3
 
 ```
 update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 ```
-
-
-
-
 
 # 获取当前目录
 

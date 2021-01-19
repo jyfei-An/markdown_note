@@ -1,3 +1,52 @@
+# spdlog
+
+# 循环日志文件
+
+```c++
+//将github上的spdlog库下载，include头文件包含到该项目中
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/rotating_file_sink.h"
+#include "spdlog/async.h"
+
+void rotating_example() {
+	// Create a file rotating logger with 5mb size max and 3 rotated files
+	auto max_size = 1048576 * 5;
+	auto max_files = 5;
+
+	auto rotating_file_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>("logs/rotating1.txt", max_size, max_files);
+    //多个日志器共享sink
+	auto logger = std::make_shared<spdlog::logger>("some_logger_name", rotating_file_sink);
+	auto logger1 = std::make_shared<spdlog::logger>("some_logger_name1", rotating_file_sink);
+	auto logger2 = std::make_shared<spdlog::logger>("some_logger_name2", rotating_file_sink);
+	//注册日志器
+	spdlog::register_logger(logger2);
+	
+	std::string test1 = u8"test";
+	while (1) {
+		// 注册后，其它代码可以根据名称获得日志器
+		auto loggertest = spdlog::get("some_logger_name2");
+		if (!loggertest)
+		{
+			std::cout << 1 << std::endl;
+		}
+		logger->info(test1);
+		logger1->info(test1);
+		logger2->info(test1);
+	}
+
+}
+
+int main()
+{
+	rotating_example();
+    std::cout << "Hello World!\n";
+}
+```
+
+
+
 #  ./configure
 
 ## 添加FPIC选项
