@@ -2,6 +2,127 @@
 
 
 
+# 获取本机IP地址(Win+linux)
+
+```c++
+#include <iostream>
+#include <optional>
+#include <string>
+
+#ifdef _WIN32
+#include <winsock2.h>
+#include <iphlpapi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#pragma comment(lib, "IPHLPAPI.lib")
+#else
+#include <sys/types.h>
+#include <ifaddrs.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <arpa/inet.h>
+#endif
+
+using namespace std;
+
+#define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x))
+#define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
+
+std::optional<std::string> GetIpAddress()
+{
+#ifdef _WIN32
+	PIP_ADAPTER_INFO pAdapterInfo;
+	PIP_ADAPTER_INFO pAdapter = NULL;
+	DWORD dwRetVal = 0;
+
+	ULONG ulOutBufLen = sizeof(IP_ADAPTER_INFO);
+	pAdapterInfo = (IP_ADAPTER_INFO *)MALLOC(sizeof(IP_ADAPTER_INFO));
+	if (pAdapterInfo == NULL) {
+		return std::nullopt;
+	}
+	
+	if (GetAdaptersInfo(pAdapterInfo, &ulOutBufLen) == ERROR_BUFFER_OVERFLOW) {
+		FREE(pAdapterInfo);
+		pAdapterInfo = (IP_ADAPTER_INFO *)MALLOC(ulOutBufLen);
+		if (pAdapterInfo == NULL) {
+			return std::nullopt;
+		}
+	}
+	
+	std::string ip_address;
+	if ((dwRetVal = GetAdaptersInfo(pAdapterInfo, &ulOutBufLen)) == NO_ERROR) {
+		pAdapter = pAdapterInfo;
+		if (pAdapter) {
+			ip_address = pAdapter->IpAddressList.IpAddress.String;
+		}
+	}
+	
+	if (pAdapterInfo) {
+		FREE(pAdapterInfo);
+	}
+	
+	if (!ip_address.empty()) {
+		return ip_address;
+	}
+	return std::nullopt;
+
+#else
+	struct ifaddrs * ifAddrStruct = NULL;
+	struct ifaddrs * ifa = NULL;
+	void * tmpAddrPtr = NULL;
+
+	getifaddrs(&ifAddrStruct);
+	std::string ip_address;
+	for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next) {
+		if (!ifa->ifa_addr) {
+			continue;
+		}
+		if (ifa->ifa_addr->sa_family == AF_INET) { // check it is IP4
+		  // is a valid IP4 Address
+			tmpAddrPtr = &((struct sockaddr_in *)ifa->ifa_addr)->sin_addr;
+			char addressBuffer[INET_ADDRSTRLEN];
+			inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
+	
+			if (strcmp(ifa->ifa_name, "lo")) {
+				continue;
+			}
+			else {
+				ip_address = addressBuffer;
+				if (!ip_address.empty()) {
+					break;
+				}
+			}
+		}
+	}
+	if (ifAddrStruct != NULL) freeifaddrs(ifAddrStruct);
+	if (!ip_address.empty()) {
+		return ip_address;
+	}
+	else {
+		return std::nullopt;
+	}
+
+#endif
+}
+
+int main()
+{
+	auto res =  GetIpAddress();
+	if (res.has_value())
+	{
+		auto ip = res.value();
+		std::cout << ip << std::endl;
+	}
+    std::cout << "Hello World!\n";
+}
+```
+
+## 参考链接
+
+https://docs.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
+
+https://www.cnblogs.com/LuckCoder/p/14310539.html
+
 # 常见问题
 
 ## linux

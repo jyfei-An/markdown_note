@@ -6,13 +6,21 @@ https://blog.csdn.net/qq_45554909/article/details/111658223
 
 [IDEA 整合 Tomcat 服务器_少年西西的博客-CSDN博客](https://blog.csdn.net/qq_45554909/article/details/111712970)
 
+https://blog.csdn.net/qq_45554909/article/details/111713007
 
+https://blog.csdn.net/qq_45554909/article/details/111713007
+
+https://blog.csdn.net/weixin_43732424/article/details/107783879
+
+https://blog.csdn.net/weixin_43732424/article/details/107783840
 
 # Maven
 
 https://www.jetbrains.com/help/idea/maven-support.html#javaee_maven
 
 # Tomcat 
+
+![image-20210124213807930](C:/Users/jiayunfei/AppData/Roaming/Typora/typora-user-images/image-20210124213807930.png)
 
 ## startup.bat后控制台乱码
 
@@ -29,6 +37,80 @@ https://www.jetbrains.com/help/idea/maven-support.html#javaee_maven
 3. 更改为 java.util.logging.ConsoleHandler.encoding = **GBK**，就可以了！
 
 
+
+
+
+# 将myeclipse的web项目导入Idea
+
+## myeclipse的web项目目录结构
+
+![image-20210124205347543](https://i.loli.net/2021/01/24/zkcibJ7ZfmA6xYt.png)
+
+## idea 打开项目
+
+### 1 File->New->Project from existing Sources
+
+
+
+![image-20210124205525459](https://i.loli.net/2021/01/24/DqYymxWwgkEUZhR.png)
+
+
+
+### 2 选择jidian文件夹
+
+![image-20210124205727548](https://i.loli.net/2021/01/24/aFnHBRx8fmW9AyU.png)
+
+
+
+### 3 选择默认即可
+
+![image-20210124205825960](https://i.loli.net/2021/01/24/5j8PlJCQSnUri4O.png)
+
+### 4 File->Project Structure
+
+将modules的paths的output path设置为webroot/web-inf/classes目录下
+
+dependencies下设置module sdk,并将红色的class给删除掉
+
+![image-20210124210142480](https://i.loli.net/2021/01/24/2fD6SnUlbsP8M9W.png)
+
+
+
+
+
+### 5 在’Facets’,添加web应用
+
+![这里写图片描述](https://i.loli.net/2021/01/24/knfUIZXC3AaRmPL.png)
+
+### 6 修改web.xml目录
+
+修改web.xml的地方为webroot的web-inf目录下，web resources root为WebRoot， 然后点击create artifact
+![image-20210124210142480](https://i.loli.net/2021/01/24/2fD6SnUlbsP8M9W.png)
+
+### 7 apply,ok
+
+## 配置tomcat启动
+
+![这里写图片描述](https://i.loli.net/2021/01/24/nmtzyGcHbUZ23QV.png)
+![这里写图片描述](https://i.loli.net/2021/01/24/bo3qKS2rAy4tdmU.png)
+![这里写图片描述](https://i.loli.net/2021/01/24/yf7TIQp2GB3tUiP.png)
+![这里写图片描述](https://i.loli.net/2021/01/24/JocHgDWbavV5u6y.png)
+然后ok，确定，接着即可启动tomcat查看效果
+![这里写图片描述](https://i.loli.net/2021/01/24/JNTBARbZvzgYkxE.png)
+
+
+
+## 参考链接
+
+https://blog.csdn.net/lxfHaHaHa/article/details/78285102
+
+
+
+
+
+# IDEA创建第一个Web程序
+
+https://m.yisu.com/zixun/314055.html
 
 # Idea第一个HelloWorld程序
 
