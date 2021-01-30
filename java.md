@@ -1,26 +1,8 @@
-https://blog.csdn.net/qq_45554909/article/details/111611282
-
-https://blog.csdn.net/qq_45554909/article/details/111658223
-
-
-
-[IDEA 整合 Tomcat 服务器_少年西西的博客-CSDN博客](https://blog.csdn.net/qq_45554909/article/details/111712970)
-
-https://blog.csdn.net/qq_45554909/article/details/111713007
-
-https://blog.csdn.net/qq_45554909/article/details/111713007
-
-https://blog.csdn.net/weixin_43732424/article/details/107783879
-
-https://blog.csdn.net/weixin_43732424/article/details/107783840
-
 # Maven
 
 https://www.jetbrains.com/help/idea/maven-support.html#javaee_maven
 
 # Tomcat 
-
-![image-20210124213807930](C:/Users/jiayunfei/AppData/Roaming/Typora/typora-user-images/image-20210124213807930.png)
 
 ## startup.bat后控制台乱码
 
