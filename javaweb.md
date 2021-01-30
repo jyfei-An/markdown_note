@@ -1,3 +1,10 @@
+# 参考资料
+
+tomcat源码及安装包
+
+链接：https://pan.baidu.com/s/1OdJppvTkXTc_1UknCh3MnQ 
+提取码：bf33 
+
 # JavaWeb
 
 ## JavaWeb 的概念
@@ -62,7 +69,7 @@ Servlet 程序从 2.5 版本是现在世面使用最多的版本（xml 配置）
 找到 Tomcat 目录下的 bin 目录下的 startup.bat 文件，双击，就可以启动 Tomcat 服务器。
 
 **如何测试 Tomcat 服务器启动成功？？？**
-打开浏览器，在浏览器地址栏中输入以下地址测试： ’
+打开浏览器，在浏览器地址栏中输入以下地址测试： 
 
 - 1、http://localhost:8080
 

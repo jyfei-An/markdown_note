@@ -88,11 +88,73 @@ https://blog.csdn.net/lxfHaHaHa/article/details/78285102
 
 
 
+# IDEA2020创建第一个Web程序
+
+## 1 创建普通java项目
+
+### 新建project
+
+![image-20210114210026812](https://i.loli.net/2021/01/14/tnEo2gLlDzYwUMd.png)
 
 
-# IDEA创建第一个Web程序
 
-https://m.yisu.com/zixun/314055.html
+### 选择java程序
+
+![image-20210114210111396](https://i.loli.net/2021/01/14/Ee1PvhQokOY53zr.png)
+
+###  填写项目名字和路径
+
+![image-20210114210154464](https://i.loli.net/2021/01/14/DJ7Or5sxQtGCBZY.png)
+
+
+
+
+
+![image-20210130152650387](https://i.loli.net/2021/01/30/mcWx38QK6ge9PME.png)
+
+
+
+## 2 添加Web框架
+
+右键，点击Add Framework support
+
+![image-20210130152751522](https://i.loli.net/2021/01/30/uv2LIgfREGSMPJB.png)
+
+
+
+
+
+![image-20210130152809803](https://i.loli.net/2021/01/30/R4pnDCcsfBxyorv.png)
+
+
+
+创建成功目录如下图
+
+![image-20210130152913296](https://i.loli.net/2021/01/30/u9GSHtw7WAKJBvI.png)
+
+
+
+## 部署tomcat服务器
+
+### 1 点击配置，添加tomcat服务器
+
+![image-20210130153152864](https://i.loli.net/2021/01/30/dCsjV1AYb3mTBLz.png)
+
+### 2 选择tomcat目录
+
+![image-20210130153329190](https://i.loli.net/2021/01/30/NyrsnReUV9pMJP3.png)
+
+
+
+### 3 点击右下角的fix按钮，进行自动配置
+
+### 4 点击Apply按钮
+
+### 5 运行程序，Web项目正常启动
+
+显示index.jsp的内容
+
+
 
 # Idea第一个HelloWorld程序
 
