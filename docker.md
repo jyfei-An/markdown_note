@@ -211,4 +211,4 @@ docker load --input fedora.tar
 
 # 重命名容器名字
 
-![image-20200523120649903](C:\Users\jiayunfei\AppData\Roaming\Typora\typora-user-images\image-20200523120649903.png)
+![image-20200523120649903](https://i.loli.net/2021/01/31/nF5NckPGKtpfoiV.png)
