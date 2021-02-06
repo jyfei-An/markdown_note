@@ -1,5 +1,79 @@
 # 函数查询手册：zeal
 
+# 递归函数
+
+编写递归函数步骤：
+
+1 明确你这个函数想要干什么，函数功能是什么，要完成什么样的一件事
+
+2 寻找递归结束条件，所谓递归，就是会在函数内部代码中，调用这个函数本身，
+所以，我们必须要找出递归的结束条件，不然的话，会一直调用自己，进入无底洞。
+也就是说，我们需要找出当参数为啥时，递归结束，之后直接把结果返回，请注意，
+这个时候我们必须能根据这个参数的值，能够直接知道函数的结果是什么。
+
+3 所谓递归，就是会在函数内部代码中，调用这个函数本身，所以，
+我们必须要找出递归的结束条件，不然的话，会一直调用自己，
+进入无底洞。也就是说，我们需要找出当参数为啥时，递归结束，之后直接把结果返回，
+请注意，这个时候我们必须能根据这个参数的值，能够直接知道函数的结果是什么。
+
+关于递归结束条件是否够严谨问题，有很多人在使用递归的时候，由于结束条件不够严谨，
+导致出现死循环。也就是说，当我们在第二步找出了一个递归结束条件的时候，
+可以把结束条件写进代码，然后进行第三步，但是请注意，当我们第三步找出等价函数之后，
+还得再返回去第二步，根据第三步函数的调用关系，会不会出现一些漏掉的结束条件。
+就像上面，f(n-2)这个函数的调用，有可能出现 f(0) 的情况，导致死循环，所以我们把它补上
+
+4 考虑优化，是否有重复计算
+如何优化？一般我们可以把我们计算的结果保证起来
+可以用数组或者 HashMap 保存，我们用数组来保存把，把 n 作为我们的数组下标，f(n) 作为值，
+例如 arr[n] = f(n)。f(n) 还没有计算过的时候，我们让 arr[n] 等于一个特殊值，例如 arr[n] = -1。
+当我们要判断的时候，如果 arr[n] = -1，则证明 f(n) 没有计算过，否则， f(n) 就已经计算过了，且 f(n) = arr[n]。
+直接把值取出来就行了
+
+参考资料：
+https://www.zhihu.com/search?type=content&q=%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0
+
+```c++
+/*给定一个二叉树，找出其最大深度。
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数*/
+
+#include <stdio.h>
+#include <windows.h>
+#include<algorithm>
+
+  struct TreeNode {
+      int val;
+      TreeNode *left;
+      TreeNode *right;
+      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  };
+
+
+class Solution {
+public:
+	//1 明确函数功能，计算二叉树的最大深度
+	int maxDepth(TreeNode* root) {
+		//2 寻找递归结束条件
+		if (!root)
+		{
+			return 0;
+		}
+		int leftheight = maxDepth(root->left);
+		int rightheight = maxDepth(root->right);
+
+		//3 最大深度 = max{左子树深度，右子树深度}+1
+		//max函数在windows.h中定义
+		return max(leftheight, rightheight)+1;
+	
+		//4 递归优化，每个节点只计算了一次，不用进行优化
+	}
+
+};
+
+```
+
 
 
 # 获取本机IP地址(Win+linux)
