@@ -232,6 +232,31 @@ RENAME：指定已安装文件的名称，该名称可能与原始文件不同�
 
 # CMake 常用命令
 
+## CMake设置FOLDER
+
+1 Add this to the top level CMakeLists.txt
+
+> set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+2 Then in some target add this to put the target in the Development folder.
+
+​	注意：必须在add_executable之后，否则cmake出错
+
+> set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER Development)
+
+例如：
+
+```cmake
+project(maptest)
+
+add_executable(${PROJECT_NAME} main.cpp)
+
+#必须在add_executable之后，否则cmake出错
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES FOLDER "STL")
+```
+
+
+
 ## 设置VS编译模式
 
 ```
