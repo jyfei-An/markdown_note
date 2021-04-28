@@ -10,6 +10,56 @@ values = np.arange(1, 1000000)
 
 
 
+# Argparse解析命令行
+
+第一步：
+
+```python
+parser = argparse.ArgumentParser(description='Process some integers.')
+```
+
+第二步：
+
+```python
+parser.add_argument('integers', metavar='N', type=int, nargs='+',
+...                     help='an integer for the accumulator')
+>>> parser.add_argument('--sum', dest='accumulate', action='store_const',
+...                     const=sum, default=max,
+...                     help='sum the integers (default: find the max)')
+```
+
+第三步：
+
+```python
+parser.parse_args(['--sum', '7', '-1', '42'])
+```
+
+参考链接：
+
+https://docs.python.org/zh-cn/3/howto/argparse.html
+
+https://docs.python.org/3/library/argparse.html
+
+# Python Logging
+
+基本用法
+
+```python
+import logging
+logging.warning('Watch out!')  # will print a message to the console
+logging.info('I told you so')  # will not print anything,默认日志等级时warning
+```
+
+```python
+import logging
+#不传入文件名字filename参数，默认打印到控制台
+logging.basicConfig(filename='example.log', level=logging.DEBUG)
+logging.debug('This message should go to the log file')
+logging.info('So should this')
+logging.warning('And this, too')
+logging.error('And non-ASCII stuff, too, like Øresund and Malmö')
+```
+
 # Ipython
 
 ## 1 变量+？显示变量信息
