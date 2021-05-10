@@ -28,6 +28,20 @@ Change the enabled=1 to enabled=0. Save and close the file. You won’t see any 
 
 
 
+# 切换root用户
+
+ ubuntu有以下方式切换到root身份：
+
+1. sudo+命令，输入当前用户密码后以[root权限](https://www.baidu.com/s?wd=root权限&tn=44039180_cpr&fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d-mHf3mHn4nW7hryDdujfv0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnH0drjc4PjmY)执行命令，有时间限制且仅限当前命令。
+
+2. sudo -i，输入当前用户密码后以[root权限](https://www.baidu.com/s?wd=root权限&tn=44039180_cpr&fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d-mHf3mHn4nW7hryDdujfv0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnH0drjc4PjmY)登录shell，无时间限制。使用exit或logout退出。
+
+3. su，输入root账户的密码后切换到root身份，无时间限制。su 用户名切换回其它用户。
+
+4. sudo su，效果同su，只是不需要root的密码，而需要当前用户的密码。
+
+
+
 # 更改ubuntu语言设置
 
 1.  如设置中文utf-8格式，添加第一个脚本文件，设置英文utf-8格式。添加第二个脚本文件
@@ -150,6 +164,90 @@ dpkg -L packagename
 dpkg -L +软件包的名字，可以知道这个软件包包含了哪些文件， 这个方法可以列出所有安装后留在系统里的文件
 
 # linux常用命令
+
+## 根据某一列去重
+
+https://blog.csdn.net/github_36669230/article/details/64503589
+
+sort -t $'\t' -k 3 -u filename
+
+sort 排序命令
+-t 指定分隔符为‘\t’
+-k 指定第三列
+-u 去重
+
+sort的其他一些选项：
+-r 降序排列
+-o 把排序结果输出到源文件
+
+sort默认是把结果输出到标准输出，所以需要用重定向才能将结果写入文件，形如
+sort filename>newfile
+如果将结果输出到原文件，用重定向相当于清空
+
+-n 看为数字来比较
+
+你有没有遇到过10比2小的情况。我反正遇到过。出现这种情况是由于排序程序将这些数字按字符来排序了，排序程序会先比较1和2，显然1小，所以就将10放在2前面喽。这也是sort的一贯作风。
+我们如果想改变这种现状，就要使用-n选项，来告诉sort，“要以数值来排序”！
+
+-f 会将小写字母都转换为大写字母来进行比较，亦即忽略大小写
+
+-c 会检查文件是否已排好序，如果乱序，则输出第一个乱序的行的相关信息，最后返回1
+
+-C 会检查文件是否已排好序，如果乱序，不输出内容，仅返回1
+
+-M 会以月份来排序，比如JAN小于FEB等等
+
+-b 会忽略每一行前面的所有空白部分，从第一个可见字符开始比较。
+
+## 统计文件行数
+
+https://www.cnblogs.com/fullhouse/archive/2011/07/17/2108786.html
+
+wc [选项] 文件…
+
+说明：该命令统计给定文件中的字节数、字数、行数。如果没有给出文件名，则从标准输入读取。wc同时也给出所有指定文件的总统计数。字是由空格字符区分开的最大字符串。
+
+该命令各选项含义如下：
+
+　　- c 统计字节数。
+
+　　- l 统计行数。
+
+　　- w 统计字数。
+
+这些选项可以组合使用。
+
+输出列的顺序和数目不受选项的顺序和数目的影响。
+
+总是按下述顺序显示并且每项最多一列。
+
+行数、字数、字节数、文件名
+
+如果命令行中没有文件名，则输出中不出现文件名。
+
+例如：
+
+wc - lcw file1 file2
+
+4 33 file1
+
+7 52 file2
+
+11 11 85 total
+
+## 合并文件内容
+
+https://blog.csdn.net/Alvin_Lam/article/details/79123882
+
+将多个文件内容合并到一个文件
+
+cat b1.sql b2.sql b3.sql > b_all.sql
+
+或者
+
+cat *.sql > merge.sql
+
+
 
 ## 清空回收站
 
@@ -376,6 +474,10 @@ sudo apt-get install vim
 
 ```
 Ctrl+S在Linux里是锁定屏幕的快捷键，如果要解锁，按下Ctrl+Q就可以了。
+
+ctrl+s进入假死状态
+
+ctrl+q解除假死状态
 ```
 
 
