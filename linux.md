@@ -1,3 +1,22 @@
+# 运行 apt-get 时报错（锁住）
+
+```text
+E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+```
+
+解决方案:
+
+```text
+sudo rm /var/lib/dpkg/lock-frontend
+sudo rm /var/lib/dpkg/lock
+sudo rm /var/cache/apt/archives/lock
+```
+
+都运行一遍，具体也不知道哪条起了作用。
+
+
+
 # How To Fix System Program Problem Detected In Ubuntu
 
 ```

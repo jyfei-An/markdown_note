@@ -80,3 +80,20 @@ https://blog.csdn.net/lawme/article/details/51034543
 
 
 
+## 安装自动补全功能
+
+1 打开anaconda，选择环境，选择open Terminal,输入下面命令进行安装（不要使用网络代理，否则会安装失败）
+ 1) pip install jupyter_contrib_nbextensions
+ 2) pip install jupyter_nbextensions_configurator
+ 3) jupyter contrib nbextension install --user 
+ 4) jupyter nbextensions_configurator enable --user
+
+2 打开jupyter notebook
+
+1)click on nbextensions tab
+
+2)unckeck disable configuration for nbextensions without explicit compatibility
+
+3)put a check on Hinterland
+
+3 打开新文件，使用自动补全功能

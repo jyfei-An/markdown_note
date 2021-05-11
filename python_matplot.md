@@ -745,6 +745,12 @@ plt.hist(a,20,normed=0,histtype="stepfilled",facecolor="b",alpha=0.75)
 
 
 
+# 鼠标控制放大缩小
+
+增加语句%matplotlib notebook
+
+![image-20210427180836946](https://i.loli.net/2021/04/27/43NwzphPyUKvXfj.png)
+
 # 参考资料
 
 https://www.cnblogs.com/ssyfj/p/9293844.html
