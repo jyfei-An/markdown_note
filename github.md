@@ -1,3 +1,105 @@
+# GFlags的安装使用
+
+## 1 安装
+
+ubuntu
+
+```
+sudo apt-get install libgflags-dev
+```
+
+macos
+
+```
+brew install gflags
+```
+
+也可以通过源码编译安装，参考链接：https://github.com/gflags/gflags/blob/master/INSTALL.md
+
+## 2 使用
+
+### 在cmake项目中使用
+
+1. Cmakelists.txt文件内容如下
+
+```cmake
+#cmake版本
+cmake_minimum_required(VERSION 3.19)
+#项目名字
+project(untitled11)
+#C++标准
+set(CMAKE_CXX_STANDARD 14)
+
+#第一步 添加gflags包
+find_package(gflags REQUIRED)
+
+#编译为可执行文件（可执行文件名字 需要使用的源文件）
+add_executable(untitled11 main.cpp)
+# 第二步设置链接，将gflags链接到我们的可执行程序
+target_link_libraries(untitled11 gflags)
+```
+
+2. main.cpp文件
+
+   ```c++
+   #include <iostream>
+   //第一步，添加头文件
+   #include <gflags/gflags.h>
+   
+   /*
+   第二步，定义使用的命令行参数
+   如：
+   DEFINE_bool(big_menu, true, "Include 'advanced' options in the menu listing");
+   DEFINE_bool：说明定义的是一个bool类型的变量（可以定义其他类型的变量	DEFINE_int32，DEFINE_int64，具体参考下面链接）
+   big_menu：参数名称，设置完参数名称后，使用时需要在可执行文件加 -big_menu 
+   true:参数的默认值
+   "Include 'advanced' options in the menu listing"：参数的用处，对参数的解释，当使用-help命令时会显示
+   */
+   
+   /*
+    *
+    * All DEFINE macros take the same three arguments:
+    * 1 the name of the flag,
+    * 2 its default value,
+    * 3 and a 'help' string that describes its use.
+    * */
+   DEFINE_string(message, "Hello World111!", "The message to print");
+   
+   //检查message参数是否合理，第一个参数为参数名称，第一个参数为参数的值
+   static bool ValidateMessage(const char* flagname, const std::string &message)
+   {
+       return !message.empty();
+   }
+   //第四步，设置检查输入参数是否合理，第一个参数为参数名称（message），第二个参数为函数名称（检查参数是否合理，参数合理返回true，不合理返回false）
+   DEFINE_validator(message, ValidateMessage);
+   
+   int main(int argc, char **argv)
+   {
+       //第一个函数和第二个函数可调用可不调用，SetUsageMessage函数设置显示help信息时最上边的信息
+       gflags::SetUsageMessage("Test CMake configuration of gflags library (gflags-config.cmake)");
+       //设置版本
+     	gflags::SetVersionString("0.1");
+       //第三步，解析命令行参数，调用如下函数，注意需要传入argc和argv的指针，因为这个函数会改变他们的值，第三个参数remove_flags
+       //一般为真，当为真时会把从argv中移除新加的参数，并且修改argc的值，当为false时，会调整新加参数的顺序
+       //（不太明白为什么这么设计？？？？？？？？）
+       gflags::ParseCommandLineFlags(&argc, &argv, true);
+     
+     	//第五步，访问参数值，直接在参数值的前面增加FLAGS_前缀，然后像普通变量使用方式使用即可
+       std::cout << FLAGS_message << std::endl;
+       //第六步，调用ShutDownCommandLineFlags函数
+       gflags::ShutDownCommandLineFlags();
+       return 0;
+   }
+   ```
+
+注意：在基本C++项目中使用基本设置包含目录以及链接目录即可
+
+具体demo可参考github的example
+
+## 参考链接
+
+https://gflags.github.io/gflags/#declare
+
 # Taskflow
 
 创建平行或者异步任务流
