@@ -1,3 +1,43 @@
+# 下载搜狗输入法
+
+## 下载链接
+
+https://pinyin.sogou.com/linux/
+
+## 使用文档
+
+https://pinyin.sogou.com/linux/help.php
+
+# 下载 Google Chrome
+
+1 打开终端，下载安装文件
+
+```text
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+```
+
+2 安装deb文件
+
+```text
+sudo apt install ./google-chrome-stable_current_amd64.deb
+```
+
+3 运行google chrome
+
+命令行输入`google-chrome`启动 Chrome。或者
+
+在活动搜索栏输入"Google Chrome”，并且点击图标，启动这个应用
+
+4 将应用固定到左侧菜单栏中
+
+点击图标，右键，选择添加到收藏夹
+
+# 安装Nvidia Driver
+
+https://www.linuxbabe.com/ubuntu/install-nvidia-driver-ubuntu-18-04
+
+https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-18-04-bionic-beaver-linux
+
 # 运行 apt-get 时报错（锁住）
 
 ```text
