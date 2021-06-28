@@ -1,3 +1,62 @@
+# Ubuntu开机报错“Started User Manager for UID 121“解决办法
+
+https://blog.csdn.net/weixin_38765304/article/details/108462032
+
+选择修复模式进行修复
+
+# How to fix “Failed to start MokManager” / “import_mok_state() failed” after failed Ubuntu Installation
+
+出现场景：
+
+在secureboot开启的情况下，安装navida显卡驱动，需要设置密钥，重启之后没有加载密钥，出现上述问题，之后将secureboot关闭，问题依旧，猜测是因为硬件会加载受信任的驱动程序，插入优盘后，不能进入安装操作系统选项，依然提示这个bug，是因为优盘里面的文件不是受信任的文件，驱动程序不会直接加载，所以可将shim里面的文件进行拷贝，该文件存储了mok信息，然后优盘即可被识别，驱动程序即可被正常加载，或者选择第二种方法，手动选择加载的驱动程序
+
+第一种方法：
+
+1 到`(usb stick)/pool/main/s/shim`目录下找到里面的`shim`安装包，解压出其中的`data.tar.gz`中的`./usr/lib/shim/mmx64.efi.signed`，然后移动到`(usb stick)/EFI/BOOT`，并重命名为`mmx64.efi`。
+
+2 选择相应的boot option，reset mok manager
+
+3 安装操作系统
+
+3 安装完成后使用之前不能使用的优盘进行重新安装操作系统
+
+第二种方法：
+
+The way I got this fixed was eventually pretty easy, but it took me some time to find out:
+
+1. Enter your BIOS (I used holding F2 while booting)
+2. Go to the “Boot” tab
+3. Use “Add New Boot Option”
+4. Press enter on “Add boot option”
+5. Enter your boot title, I just named it “ubuntuinstall”
+6. Press enter on “Path for boot option”
+7. Select your USB
+8. Select UEFI
+9. Select BOOT
+10. Select grubx64.efi
+11. Press Create
+12. Reboot, and enter BIOS again
+13. Go to “Save & Exit” tab
+14. Use Boot Override to launch your just created “ubuntuinstall” option
+15. Ubuntu will now properly boot the installation again and you can now install it properly
+
+# 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系
+
+使用sudo apt-get install <packgename>时出现提示无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。
+
+可以换个命令sudo aptitude  install <packgename>，因为aptitude会自动把所有依赖的库都帮你顺着找到，并下载好。而apt-get下载某个包中它的所有依赖项都必须存在，这就是为什么我们每次执行apt-get的时候都需要先apt-get update的更新软件包的原因。
+
+如果提示找不到aptitude，可以先使用sudo apt-get install aptitude进行下载
+
+
+# apt-get update 与 upgrade区别
+
+apt-get是某些linux发行版使用的一个“包管理器”（还有别的发行版使用yum等，以及brew等其他平台上的包管理器，工作原理类似）。
+包管理器的作用是从源（Source）服务器那里下载最新的软件包列表，然后在你需要安装某个软件包（apt-get install）的时候从列表里面查询这个软件包的版本信息、系统要求、翻译、依赖项（该软件正常运行必须安装的其它软件）并且添加到同时安装的列表里面，再查询所有安装列表里面的软件包的.deb文件下载地址，最后批量下载，自动分析安装顺序然后安装完成。
+但是这个软件包列表是不会被自动下载的，需要用户使用apt-get update更新。这样，apt-get才能知道每个软件包的最新信息，从而正确地下载最新版本的软件。
+至于apt-get upgrade，则是对已经安装的软件包本身进行更新的过程。由于确定要更新的软件包需要对本地安装的版本和列表的版本进行比较，所以要在update以后运行这一条。
+要求在install操作之前执行update和upgrade，实际上是确保本地软件列表信息和已安装软件均为最新的过程。这样做可以最大限度地确保新安装的软件包正常工作。
+
 # 下载搜狗输入法
 
 ## 下载链接

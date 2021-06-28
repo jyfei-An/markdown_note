@@ -113,6 +113,16 @@ SqlOperator - executes a SQL command
 
 Sensor - waits for a certain time, file, database row, S3 key, etc… 
 
+
+
+| Operators            | 作用 |      |
+| -------------------- | ---- | ---- |
+| ShortCircuitOperator |      |      |
+|                      |      |      |
+|                      |      |      |
+
+
+
 ### Tasks
 
 Task为DAG中具体的作业任务，依赖于DAG，也就是必须存在于某个DAG中。
