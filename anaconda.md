@@ -97,3 +97,37 @@ https://blog.csdn.net/lawme/article/details/51034543
 3)put a check on Hinterland
 
 3 打开新文件，使用自动补全功能
+
+
+
+# Jupyter
+
+音标:/ˈdʒuːpɪtə(r)/
+
+朱批特儿
+
+## 1 显示左边markdown目录
+
+### （1）安装Jupyter Notebook extensions
+
+打开anaconda，选择base环境，右键open terminal，执行下面命令
+
+（当存在多个python环境时，安装Jupyter-plugins选择base即可，其他环境的jupyter也会进行同步）
+
+```text
+conda install -c conda-forge jupyter_contrib_nbextensions
+```
+
+### （2）打开jupyter，选择Nbextensions
+
+![image-20210619110041930](https://i.loli.net/2021/06/19/vqeJHgRzCrWSFab.png)
+
+### (3)选择table_of_counts插件
+
+![image-20210619110125258](https://i.loli.net/2021/06/19/u5d2h4NFGoylVQR.png)
+
+### （4）勾选后退出当前界面，重新打开想要显示目录的文件
+
+### （5）点击下图中的按钮，显示markdown目录
+
+![image-20210619110257518](https://i.loli.net/2021/06/19/gA26O7uaNQcIR4V.png)
