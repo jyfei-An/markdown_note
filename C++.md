@@ -1,4 +1,18 @@
+
+
 # 函数查询手册：zeal
+
+
+
+# std::sort的使用方法
+
+The new C++11 standard requires that the complexity of sort to be O(Nlog(N)) in the worst case. Previous versions of C++ such as C++03 allow possible worst case scenario of O(N^2). Only average complexity was required to be O(N log N).
+
+https://www.geeksforgeeks.org/c-qsort-vs-c-sort/
+
+https://www.geeksforgeeks.org/sort-c-stl/
+
+
 
 # 递归函数
 
