@@ -146,6 +146,50 @@ print(s)
 
 ![img](https://i.loli.net/2021/01/17/3OtkbqJhc4mgLpN.png)
 
+### 删除行/删除满足条件的行
+
+https://www.geeksforgeeks.org/drop-rows-from-the-dataframe-based-on-certain-condition-applied-on-a-column/
+
+当元素是list或者是其他复杂元素时，可使用map函数，具体可参考
+
+https://zhuanlan.zhihu.com/p/100064394
+
+### 当元素是list时，删除满足元素的list
+
+def listtoint_map(x):
+    return x[0]
+
+#将列表转为int（列表中只有一个值），否则没办法直接和0比较
+test_data["key"] = human_test_data["key"].map(listtoint_map)
+
+test_data1 = test_data()
+test_data2 = test_data()
+
+==============================
+
+
+data1 = test_data1.drop(test_data1[test_data1['key']<0].index)
+
+Data2 = test_data2.drop(test_data2[test_data2['key']>=0].index)
+
+==================================
+
+#将int转为list，和原始特征值的格式相同
+def inttolist_map(x):
+    data = []
+    data.append(x)
+    return data
+
+data1["key"] = data1["key"].map(inttolist_map)
+data2["key"] = data2["key"].map(inttolist_map)
+
+=================================
+
+data1.to_pickle("./data1.pkl")
+data2.to_pickle("./data2.pkl")
+
+
+
 ## （二）案例使用
 
 ![img](https://images2018.cnblogs.com/blog/1309518/201807/1309518-20180711190539780-1229352807.png)
