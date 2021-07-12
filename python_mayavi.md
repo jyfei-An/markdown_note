@@ -1,12 +1,18 @@
 # 安装
 
+1 使用anaconda 新建python虚拟环境（python3.6）
+
+2 打开终端执行下面命令
+
+```py
+conda install -c conda-forge mayavi
 ```
-VTK　　　　>pip3 install VTK-7.1.1-cp35-cp35m-win_amd64.whl
-numpy　　 >pip3 install numpy‑1.14.5+mkl‑cp35‑cp35m‑win_amd64.whl
-traits　　>pip3 install traits-4.6.0-cp36-cp36m-win_amd64.whl
-mayavi　　>pip3 install mayavi-4.5.0+vtk71-cp35-cp35m-win_amd64.whl
-PyQt4　　 >pip3 install PyQt4-4.11.4-cp35-cp35m-win_amd64.whl
-```
+
+测试：打开python环境，from mayavi import mlab
+
+3 通过anaconda界面安装pands、matplotlib、scikit-learn等库
+
+4 通过anaconda界面安装jupyter
 
 # 测试是否安装成功
 
@@ -421,3 +427,7 @@ mlab.show()
 # 参考资料
 
 https://www.cnblogs.com/ssyfj/p/9306602.html
+
+# B站视频
+
+https://www.bilibili.com/video/BV1CV411o7nx?from=search&seid=11373589994228802793
