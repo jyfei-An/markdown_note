@@ -131,3 +131,17 @@ conda install -c conda-forge jupyter_contrib_nbextensions
 ### （5）点击下图中的按钮，显示markdown目录
 
 ![image-20210619110257518](https://i.loli.net/2021/06/19/gA26O7uaNQcIR4V.png)
+
+## Jupiter-lab
+
+### install
+
+```
+pip install jupyterlab
+```
+
+### Run all cells
+
+- `<esc>` to go into command mode
+- `<ctrl+a>` to select all cells
+- `<ctrl+enter>` to run all cells
