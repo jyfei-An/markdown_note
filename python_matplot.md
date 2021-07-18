@@ -751,6 +751,216 @@ plt.hist(a,20,normed=0,histtype="stepfilled",facecolor="b",alpha=0.75)
 
 ![image-20210427180836946](https://i.loli.net/2021/04/27/43NwzphPyUKvXfj.png)
 
+
+
+# Meshgrid函数
+
+meshgrid函数用两个坐标轴上的点在平面上画网格
+
+用法：
+　　[X,Y]=meshgrid(x,y)
+
+　　[X,Y]=meshgrid(x)与[X,Y]=meshgrid(x,x)是等同的
+
+　　[X,Y,Z]=meshgrid(x,y,z)生成三维数组，可用来计算三变量的函数和绘制三维立体图
+
+这里，主要以[X,Y]=meshgrid(x,y)为例，来对该函数进行介绍。
+
+[X,Y] = meshgrid(x,y) 将向量x和y定义的区域转换成矩阵X和Y,其中矩阵X的行向量是向量x的简单复制，而矩阵Y的列向量是向量y的简单复制
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 5, 6)
+y = np.linspace(1, 3, 3)
+X, Y = np.meshgrid(x,y)
+'''
+x:array([0., 1., 2., 3., 4., 5.])
+y:array([1., 2., 3.])
+#矩阵X的行向量是向量x的简单复制
+X:array([[0., 1., 2., 3., 4., 5.],
+       [0., 1., 2., 3., 4., 5.],
+       [0., 1., 2., 3., 4., 5.]])
+#矩阵Y的列向量是向量y的简单复制       
+Y:array([[1., 1., 1., 1., 1., 1.],
+       [2., 2., 2., 2., 2., 2.],
+       [3., 3., 3., 3., 3., 3.]])
+'''
+
+
+```
+
+```python
+#plot函数会自动处理X和Y的坐标，使之绘制成网格
+plt.plot(X, Y, marker='.', color='blue', linestyle='none')
+plt.show()
+```
+
+![image-20210717161703005](https://i.loli.net/2021/07/17/ivuPAJHfwEsC5gX.png)
+
+```python
+z = [i for i in zip(X.flat,Y.flat)]
+'''
+Z:
+[(0.0, 1.0),
+ (1.0, 1.0),
+ (2.0, 1.0),
+ (3.0, 1.0),
+ (4.0, 1.0),
+ (5.0, 1.0),
+ (0.0, 2.0),
+ (1.0, 2.0),
+ (2.0, 2.0),
+ (3.0, 2.0),
+ (4.0, 2.0),
+ (5.0, 2.0),
+ (0.0, 3.0),
+ (1.0, 3.0),
+ (2.0, 3.0),
+ (3.0, 3.0),
+ (4.0, 3.0),
+ (5.0, 3.0)]
+'''
+```
+
+
+
+# contour函数
+
+https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.contour.html
+
+绘制等高线
+
+contour and contourf draw contour lines and filled contours, respectively. Except as noted, function signatures and return values are the same for both versions.
+
+## contour 
+
+contour ：简单绘制等高线，不进行填充颜色（no filling）
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def f(x,y):
+    # the height function
+    return x+y
+
+x = np.linspace(0, 5, 6)
+y = np.linspace(1, 3, 3)
+X, Y = np.meshgrid(x,y)
+#Z = f(X,Y)，Z.shape:(3, 6)
+C = plt.contour(X, Y, f(X, Y),levels=1, alpha=.75, cmap=plt.cm.hot)
+# adding label
+plt.clabel(C, inline=True, fontsize=20)
+plt.show()
+
+'''
+Z:
+array([[1., 2., 3., 4., 5., 6.],
+       [2., 3., 4., 5., 6., 7.],
+       [3., 4., 5., 6., 7., 8.]])
+
+'''
+```
+
+![image-20210717162748119](C:/Users/jiayunfei/AppData/Roaming/Typora/typora-user-images/image-20210717162748119.png)
+
+## contourf 
+
+contourf ：绘制等高线，填充颜色（filling）
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def f(x,y):
+    # the height function
+    return x+y
+
+x = np.linspace(0, 5, 6)
+y = np.linspace(1, 3, 3)
+X, Y = np.meshgrid(x,y)
+
+C = plt.contourf(X, Y, f(X, Y),levels=1, alpha=.75, cmap=plt.cm.hot)
+
+plt.show()
+
+```
+
+![image-20210717162645433](https://i.loli.net/2021/07/17/mEiOxZYDtBX7GyL.png)
+
+## Parameters
+
+contour 函数和contourf函数的参数和返回值相同
+
+**X, Y**：array-like, optional
+
+The coordinates of the values in *Z*.
+
+*X* and *Y* must both be 2D with the same shape as *Z* (e.g. created via [`numpy.meshgrid`](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html#numpy.meshgrid)), or they must both be 1-D such that `len(X) == M` is the number of columns in *Z* and `len(Y) == N` is the number of rows in *Z*.
+
+If not given, they are assumed to be integer indices, i.e. `X = range(M)`, `Y = range(N)`.
+
+X和Y可以传整数：相当于`X = range(M)`, `Y = range(N)`，会自动调用range函数生成一维数组
+
+X和Y可以一维数组，默认相当于`len(X) == M`是Z的列数，`len(Y) == N`是列的行数
+
+X和Y可以传二维数组，X、Y、Z三者的形状必须相同
+
+
+
+**Z** ：(M, N) array-like
+
+The height values over which the contour is drawn.
+
+Z是二维数组，网格上的每一个点都有其高度，所以必须传入二维矩阵
+
+
+
+**levels：**int or array-like, optional
+
+Determines the number and positions of the contour lines / regions.
+
+If an int *n*, use [`MaxNLocator`](https://matplotlib.org/stable/api/ticker_api.html#matplotlib.ticker.MaxNLocator), which tries to automatically choose no more than *n+1* "nice" contour levels between *vmin* and *vmax*.
+
+If array-like, draw contour lines at the specified levels. The values must be in increasing order.
+
+levels可以传整数，自动选择绘制不超过n+1条等高线，例如 levels=1
+
+![image-20210717164123773](https://i.loli.net/2021/07/17/dbnWRPrUQS18LjN.png)
+
+levels可以传数组，在指定的值绘制等高线，数组中的值必须递增，例如levels=[2,3,5]
+
+![image-20210717164114154](https://i.loli.net/2021/07/17/C3KFcBudVeE1Ozm.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def f(x,y):
+    # the height function
+    return x+y
+
+x = np.linspace(0, 5, 6)
+y = np.linspace(1, 3, 3)
+X, Y = np.meshgrid(x,y)
+
+#C = plt.contour(X, Y, f(X, Y),levels=1)
+C = plt.contour(X, Y, f(X, Y),levels=[2,3,5])
+
+# adding label
+
+plt.clabel(C, inline=True, fontsize=20)
+
+plt.show()
+```
+
+
+
 # 参考资料
 
 https://www.cnblogs.com/ssyfj/p/9293844.html
