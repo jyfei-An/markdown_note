@@ -1,3 +1,27 @@
+# AWK
+
+## 得到文件第三列减去第二列的结果
+
+awk -F, '{print $2-$3}' yield_test.txt 
+
+## 对结果进行去重，并输出到test.txt文件中
+
+awk -F, '{print $2-$3}' yield_test.txt  | unique test.txt
+
+## 对结果进行排序
+
+awk -F, '{print $2-$3}' yield_test.txt  | sort
+
+
+
+# Ubuntu 截图
+
+https://blog.csdn.net/u012707739/article/details/77899405
+
+可将原始快捷键设置为ctrl+alt+A
+
+
+
 # Ubuntu开机报错“Started User Manager for UID 121“解决办法
 
 https://blog.csdn.net/weixin_38765304/article/details/108462032
