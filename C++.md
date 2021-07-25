@@ -14,6 +14,71 @@ https://www.geeksforgeeks.org/sort-c-stl/
 
 
 
+# C++类型转换
+
+## static_cast
+
+任何具有明确定义的类型转换，只要不包含底层const,都可以使用static_cast
+
+example:
+
+```c++
+int j=10;
+double value=static_cast<double>(j)/2; 
+```
+
+```c++
+void *p =&d;
+//必须确保d是double类型，否则类型不符合，会产生未定义的结果
+double *dp=static_cast<double *>(p);
+```
+
+
+
+## const_cast
+
+const_cast只能改变运算对象的底层const，即将常量对象转换成非常量对象。去掉const性质
+
+const_cast常常用于函数重载种，如一个函数是常函数，一个是普通函数，则可以直接复用一份代码
+
+注：如果对象是常量，再使用const_cast执行操作就会产生未定义的行为
+
+```c++
+const volatile int ci = 100;
+int* pci = const_cast<int*>(&ci);
+```
+
+## reinterpret_cast
+
+reinterpret_cast通常为运算对象的位模式提供较低层次上的重新解释
+
+```c++
+int *ip;
+char *pc = reinterpret_cast<char *>(ip); //编译器不会报错
+string str(pc);//可能在运行时发生错误，pc所值的真实对象是一个int而非字符
+```
+
+使用reinterpret_cast非常危险，一般不建议使用
+
+## dynamic_cast
+
+dynamic_cast用于将基类的指针或引用安全的转换成派生类的指针或引用
+
+使用场景：
+
+想使用基类的指针或者引用执行子类的某个函数并且该函数不是虚函数（一般情况，我们应该尽量使用虚函数）
+
+当基类指针指向子类对象时，dynamic_cast是安全的并且可以执行转换，否则会执行失败或则抛出异常
+
+```c++
+//A是基类，B是子类
+B b;
+A* pa = &b;
+B* pb = dynamic_cast<B*>(pa);
+```
+
+
+
 # 递归函数
 
 编写递归函数步骤：
