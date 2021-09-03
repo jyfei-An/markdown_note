@@ -1,3 +1,50 @@
+# sort函数
+
+```c++
+vector<int> vi{ 2,1,5,3,7,9,12,3,8 };
+	//默认从小到大排序
+	sort(vi.begin(),vi.end());
+	//和上面的效果一致，从小到大排序
+	//sort(vi.begin(), vi.end(), less<int>());
+	for (auto i : vi)
+	{
+		std::cout << i << " ";
+	}
+	std::cout << endl;
+
+	//从大到小排序
+	sort(vi.begin(), vi.end(), greater<int>());
+	for (auto i : vi)
+	{
+		std::cout << i << " ";
+	}
+	std::cout << endl;
+	
+	vector<vector<int>> vvi{ { 6, 8 }, { 1, 9 }, { 2, 4 }, { 4, 7 } };
+	//自定义排序，按照vector的第二个数字从小到大进行排序
+	//sort(vvi.begin(), vvi.end(), [](const vector<int> &va, const vector<int> &vb) {return va[1] < vb[1]; });
+	//自定义排序，按照vector的第二个数字从大到小进行排序
+	sort(vvi.begin(), vvi.end(), [](const vector<int> &va, const vector<int> &vb) {return va[1] > vb[1]; });
+	for (auto t:vvi)
+	{
+		for (auto i:t)
+		{
+			std::cout << i << " ";
+		}
+		std::cout << std::endl;
+	}
+```
+
+
+
+# 优先队列
+
+https://www.cnblogs.com/zwfymqz/p/7800654.html
+
+https://en.cppreference.com/w/cpp/container/priority_queue
+
+priority_queue自定义函数的比较与sort正好是相反的，也就是说，如果你是把大于号作为第一关键字的比较方式，那么堆顶的元素就是第一关键字最小的
+
 # 哈希表
 
 ## 相关概念
