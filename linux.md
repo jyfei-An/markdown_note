@@ -256,7 +256,11 @@ https://www.addictivetips.com/ubuntu-linux-tips/fsearch-find-files-on-linux/
 GParted
 ```
 
+https://linuxways.net/centos/how-to-install-gparted-on-ubuntu-20-04/
 
+```shell
+sudo apt install gparted
+```
 
 # Deb文件操作
 
